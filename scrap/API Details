@@ -1,0 +1,27 @@
+/workspace
+workspace.json
+
+workspace/workspacehk62905lvaz9qiao/runtime
+Runtime.json
+
+
+machine?workspace=workspacehk62905lvaz9qiao
+Machine.json
+
+machine/machine0lnkxc488mmj3002/command
+{
+          "commandLine": "mvn clean install -f ${current.project.path}",
+          "name": "newMaven",
+          "type": "mvn",
+          "attributes": {
+            "previewUrl": "http://${server.port.8080}/${current.project.relpath}"
+          }
+        }
+Command.json
+
+http://beta.codenvy.com/api/machine/machine8cnwea8t1jhoqvey/filepath/projects/HelloWorld/one.txt
+
+x-everrest-websocket-channel
+
+{"method":"POST","headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"body":"{\"channel\":\"machine:status:workspacehk62905lvaz9qiao:ws-machine\"}"}
+WSMachine.json

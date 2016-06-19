@@ -1,0 +1,30 @@
+{
+  "commandLine": "mvn clean install -f ${current.project.path}",
+  "alive": false,
+  "name": "newMaven",
+  "attributes": {},
+  "type": "mvn",
+  "pid": 4078,
+  "links": [
+    {
+      "href": "http://beta.codenvy.com/api/machine/machine0lnkxc488mmj3002/process/4078",
+      "parameters": [],
+      "rel": "stop process",
+      "method": "DELETE"
+    },
+    {
+      "href": "http://beta.codenvy.com/api/machine/machine0lnkxc488mmj3002/process/4078/logs",
+      "parameters": [],
+      "rel": "get process logs",
+      "method": "GET",
+      "produces": "text/plain"
+    },
+    {
+      "href": "http://beta.codenvy.com/api/machine/machine0lnkxc488mmj3002/process",
+      "parameters": [],
+      "rel": "get processes",
+      "method": "GET",
+      "produces": "application/json"
+    }
+  ]
+}

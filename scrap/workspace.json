@@ -1,0 +1,487 @@
+[
+  {
+    "namespace": "userbce0jsgpe1bkza28",
+    "config": {
+      "defaultEnv": "MyAndroid",
+      "commands": [
+        {
+          "commandLine": "mvn clean install -f ${current.project.path}",
+          "name": "newMaven",
+          "type": "mvn",
+          "attributes": {
+            "previewUrl": "http://${server.port.8080}/${current.project.relpath}"
+          }
+        }
+      ],
+      "projects": [
+        {
+          "mixins": [
+            "pullrequest",
+            "git"
+          ],
+          "source": {
+            "location": "https://github.com/che-samples/mobile-android-hello-world.git",
+            "type": "git",
+            "parameters": {}
+          },
+          "description": "hello",
+          "problems": [],
+          "links": [],
+          "name": "HelloWorld",
+          "type": "maven",
+          "path": "/HelloWorld",
+          "attributes": {
+            "maven.artifactId": [
+              "mobile-android-java-basic"
+            ],
+            "maven.parent.version": [
+              ""
+            ],
+            "maven.test.source.folder": [
+              "src/test/java"
+            ],
+            "maven.version": [
+              "1.0-SNAPSHOT"
+            ],
+            "maven.parent.groupId": [
+              ""
+            ],
+            "languageVersion": [
+              "1.8.0_45"
+            ],
+            "language": [
+              "java"
+            ],
+            "contribute_to_branch": [
+              "master"
+            ],
+            "maven.source.folder": [
+              "src/main/java"
+            ],
+            "git.repository.remotes": [
+              "https://github.com/che-samples/mobile-android-hello-world.git"
+            ],
+            "maven.groupId": [
+              "com.codenvy.examples"
+            ],
+            "maven.packaging": [
+              "apk"
+            ],
+            "containsJavaFiles": [
+              "true"
+            ],
+            "vcs.provider.name": [
+              "git"
+            ],
+            "git.current.branch.name": [
+              "master"
+            ],
+            "maven.parent.artifactId": [
+              ""
+            ]
+          }
+        }
+      ],
+      "environments": [
+        {
+          "machineConfigs": [
+            {
+              "envVariables": {},
+              "dev": true,
+              "limits": {
+                "ram": 3000
+              },
+              "source": {
+                "location": "http://beta.codenvy.com/api/recipe/recipejjxl905kjs26ofd4/script",
+                "type": "dockerfile"
+              },
+              "servers": [],
+              "name": "ws-machine",
+              "type": "docker",
+              "links": [
+                {
+                  "href": "ws://beta.codenvy.com/api/ws/workspacehk62905lvaz9qiao",
+                  "rel": "get machine logs channel",
+                  "method": "GET",
+                  "parameters": [
+                    {
+                      "valid": [],
+                      "required": true,
+                      "name": "channel",
+                      "defaultValue": "workspacehk62905lvaz9qiao:MyAndroid:ws-machine"
+                    }
+                  ]
+                },
+                {
+                  "href": "ws://beta.codenvy.com/api/ws/workspacehk62905lvaz9qiao",
+                  "rel": "get machine status channel",
+                  "method": "GET",
+                  "parameters": [
+                    {
+                      "valid": [],
+                      "required": true,
+                      "name": "channel",
+                      "defaultValue": "machine:status:workspacehk62905lvaz9qiao:ws-machine"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "name": "MyAndroid"
+        }
+      ],
+      "name": "MyAndroid",
+      "links": []
+    },
+    "temporary": false,
+    "status": "STOPPED",
+    "id": "workspacehk62905lvaz9qiao",
+    "attributes": {
+      "stopped_by": "activity-checker",
+      "updated": "1463562816128",
+      "created": "1462187380301"
+    },
+    "links": [
+      {
+        "href": "http://beta.codenvy.com/api/workspace/workspacehk62905lvaz9qiao",
+        "rel": "self link",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspacehk62905lvaz9qiao/runtime",
+        "rel": "start workspace",
+        "method": "POST",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspacehk62905lvaz9qiao",
+        "rel": "remove workspace",
+        "method": "DELETE",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace",
+        "rel": "get all user workspaces",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspacehk62905lvaz9qiao/snapshot",
+        "rel": "get workspace snapshot",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "text/html",
+        "href": "http://beta.codenvy.com/ws/MyAndroid",
+        "rel": "ide url",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "href": "ws://beta.codenvy.com/api/ws/workspacehk62905lvaz9qiao",
+        "rel": "get workspace events channel",
+        "method": "GET",
+        "parameters": [
+          {
+            "valid": [],
+            "required": true,
+            "name": "channel",
+            "defaultValue": "workspace:workspacehk62905lvaz9qiao"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "namespace": "userbce0jsgpe1bkza28",
+    "config": {
+      "defaultEnv": "wksp-jwcd",
+      "commands": [],
+      "projects": [],
+      "environments": [
+        {
+          "machineConfigs": [
+            {
+              "envVariables": {},
+              "dev": true,
+              "limits": {
+                "ram": 1000
+              },
+              "source": {
+                "location": "http://beta.codenvy.com/api/recipe/recipevuyd5gv0r5li9okh/script",
+                "type": "dockerfile"
+              },
+              "servers": [],
+              "name": "ws-machine",
+              "type": "docker",
+              "links": [
+                {
+                  "href": "ws://beta.codenvy.com/api/ws/workspace33xond960hzwucgw",
+                  "rel": "get machine logs channel",
+                  "method": "GET",
+                  "parameters": [
+                    {
+                      "valid": [],
+                      "required": true,
+                      "name": "channel",
+                      "defaultValue": "workspace33xond960hzwucgw:wksp-jwcd:ws-machine"
+                    }
+                  ]
+                },
+                {
+                  "href": "ws://beta.codenvy.com/api/ws/workspace33xond960hzwucgw",
+                  "rel": "get machine status channel",
+                  "method": "GET",
+                  "parameters": [
+                    {
+                      "valid": [],
+                      "required": true,
+                      "name": "channel",
+                      "defaultValue": "machine:status:workspace33xond960hzwucgw:ws-machine"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "name": "wksp-jwcd"
+        }
+      ],
+      "name": "wksp-jwcd",
+      "links": []
+    },
+    "temporary": false,
+    "status": "STOPPED",
+    "id": "workspace33xond960hzwucgw",
+    "attributes": {
+      "updated": "1462802553172",
+      "created": "1462802430830"
+    },
+    "links": [
+      {
+        "href": "http://beta.codenvy.com/api/workspace/workspace33xond960hzwucgw",
+        "rel": "self link",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspace33xond960hzwucgw/runtime",
+        "rel": "start workspace",
+        "method": "POST",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspace33xond960hzwucgw",
+        "rel": "remove workspace",
+        "method": "DELETE",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace",
+        "rel": "get all user workspaces",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspace33xond960hzwucgw/snapshot",
+        "rel": "get workspace snapshot",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "text/html",
+        "href": "http://beta.codenvy.com/ws/wksp-jwcd",
+        "rel": "ide url",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "href": "ws://beta.codenvy.com/api/ws/workspace33xond960hzwucgw",
+        "rel": "get workspace events channel",
+        "method": "GET",
+        "parameters": [
+          {
+            "valid": [],
+            "required": true,
+            "name": "channel",
+            "defaultValue": "workspace:workspace33xond960hzwucgw"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "namespace": "userbce0jsgpe1bkza28",
+    "config": {
+      "defaultEnv": "tr2",
+      "commands": [
+        {
+          "commandLine": "mvn -f ${current.project.path} clean install",
+          "name": "qqqq",
+          "type": "mvn",
+          "attributes": {
+            "previewUrl": "http://${server.port.8080}/${current.project.relpath}"
+          }
+        }
+      ],
+      "projects": [
+        {
+          "mixins": [
+            "pullrequest",
+            "git"
+          ],
+          "source": {
+            "location": "https://github.com/che-samples/console-cpp-simple.git",
+            "type": "git",
+            "parameters": {}
+          },
+          "problems": [],
+          "links": [],
+          "name": "KK",
+          "type": "blank",
+          "path": "/KK",
+          "attributes": {
+            "vcs.provider.name": [
+              "git"
+            ],
+            "git.current.branch.name": [
+              "master"
+            ],
+            "contribute_to_branch": [
+              "master"
+            ],
+            "git.repository.remotes": [
+              "https://github.com/che-samples/console-cpp-simple.git"
+            ]
+          }
+        }
+      ],
+      "environments": [
+        {
+          "machineConfigs": [
+            {
+              "envVariables": {},
+              "dev": true,
+              "limits": {
+                "ram": 1000
+              },
+              "source": {
+                "location": "http://beta.codenvy.com/api/recipe/recipe41q1w1014x2wykqf/script",
+                "type": "dockerfile"
+              },
+              "servers": [],
+              "name": "ws-machine",
+              "type": "docker",
+              "links": [
+                {
+                  "href": "ws://beta.codenvy.com/api/ws/workspacenqcfaj7hqpo5j6ks",
+                  "rel": "get machine logs channel",
+                  "method": "GET",
+                  "parameters": [
+                    {
+                      "valid": [],
+                      "required": true,
+                      "name": "channel",
+                      "defaultValue": "workspacenqcfaj7hqpo5j6ks:tr2:ws-machine"
+                    }
+                  ]
+                },
+                {
+                  "href": "ws://beta.codenvy.com/api/ws/workspacenqcfaj7hqpo5j6ks",
+                  "rel": "get machine status channel",
+                  "method": "GET",
+                  "parameters": [
+                    {
+                      "valid": [],
+                      "required": true,
+                      "name": "channel",
+                      "defaultValue": "machine:status:workspacenqcfaj7hqpo5j6ks:ws-machine"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "name": "tr2"
+        }
+      ],
+      "name": "tr2",
+      "links": []
+    },
+    "temporary": false,
+    "status": "STOPPED",
+    "id": "workspacenqcfaj7hqpo5j6ks",
+    "attributes": {
+      "stopped_by": "activity-checker",
+      "updated": "1463119854600",
+      "created": "1462446917606"
+    },
+    "links": [
+      {
+        "href": "http://beta.codenvy.com/api/workspace/workspacenqcfaj7hqpo5j6ks",
+        "rel": "self link",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspacenqcfaj7hqpo5j6ks/runtime",
+        "rel": "start workspace",
+        "method": "POST",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspacenqcfaj7hqpo5j6ks",
+        "rel": "remove workspace",
+        "method": "DELETE",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace",
+        "rel": "get all user workspaces",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "application/json",
+        "href": "http://beta.codenvy.com/api/workspace/workspacenqcfaj7hqpo5j6ks/snapshot",
+        "rel": "get workspace snapshot",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "produces": "text/html",
+        "href": "http://beta.codenvy.com/ws/tr2",
+        "rel": "ide url",
+        "method": "GET",
+        "parameters": []
+      },
+      {
+        "href": "ws://beta.codenvy.com/api/ws/workspacenqcfaj7hqpo5j6ks",
+        "rel": "get workspace events channel",
+        "method": "GET",
+        "parameters": [
+          {
+            "valid": [],
+            "required": true,
+            "name": "channel",
+            "defaultValue": "workspace:workspacenqcfaj7hqpo5j6ks"
+          }
+        ]
+      }
+    ]
+  }
+]

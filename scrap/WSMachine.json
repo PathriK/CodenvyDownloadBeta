@@ -1,0 +1,44 @@
+CONNECTED
+
+SENT: {"method":"POST","headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"body":"{\"channel\":\"machine:status:workspacehk62905lvaz9qiao:ws-machine\"}"}
+
+  RESPONSE: {"headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"method":"POST","responseCode":200,"body":"{\"channel\":\"machine:status:workspacehk62905lvaz9qiao:ws-machine\"}"}
+
+RESPONSE: {"headers":[{"name":"x-everrest-websocket-channel","value":"machine:status:workspacehk62905lvaz9qiao:ws-machine"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"{\"machineId\":\"machineq44oiflb8q2fmjim\",\"eventType\":\"CREATING\",\"dev\":true,\"machineName\":\"ws-machine\",\"workspaceId\":\"workspacehk62905lvaz9qiao\"}"}
+
+RESPONSE: {"headers":[{"name":"x-everrest-websocket-channel","value":"machine:status:workspacehk62905lvaz9qiao:ws-machine"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"{\"machineId\":\"machineq44oiflb8q2fmjim\",\"eventType\":\"RUNNING\",\"dev\":true,\"machineName\":\"ws-machine\",\"workspaceId\":\"workspacehk62905lvaz9qiao\"}"}
+/////
+{
+   "headers":[
+      {
+         "name":"x-everrest-websocket-channel",
+         "value":"machine:status:workspacehk62905lvaz9qiao:ws-machine"
+      },
+      {
+         "name":"x-everrest-websocket-message-type",
+         "value":"none"
+      }
+   ],
+   "responseCode":0,
+   "body":"{\"machineId\":\"machineq44oiflb8q2fmjim\",\"eventType\":\"RUNNING\",\"dev\":true,\"machineName\":\"ws-machine\",\"workspaceId\":\"workspacehk62905lvaz9qiao\"}"
+}
+////
+{
+   "machineId":"machineq44oiflb8q2fmjim",
+   "eventType":"RUNNING",
+   "dev":true,
+   "machineName":"ws-machine",
+   "workspaceId":"workspacehk62905lvaz9qiao"
+}
+///
+{
+   "headers":[
+      {
+         "name":"x-everrest-websocket-message-type",
+         "value":"subscribe-channel"
+      }
+   ],
+   "method":"POST",
+   "responseCode":200,
+   "body":"{\"channel\":\"machine:status:workspacehk62905lvaz9qiao:ws-machine\"}"
+}

@@ -1,0 +1,200 @@
+{
+  "attributes": {
+    "stopped_by": "activity-checker",
+    "updated": "1463571185502",
+    "created": "1462187380301"
+  },
+  "namespace": "userbce0jsgpe1bkza28",
+  "temporary": false,
+  "id": "workspacehk62905lvaz9qiao",
+  "status": "STOPPED",
+  "config": {
+    "defaultEnv": "MyAndroid",
+    "environments": [
+      {
+        "name": "MyAndroid",
+        "machineConfigs": [
+          {
+            "limits": {
+              "ram": 3000
+            },
+            "name": "ws-machine",
+            "type": "docker",
+            "source": {
+              "location": "http://beta.codenvy.com/api/recipe/recipejjxl905kjs26ofd4/script",
+              "type": "dockerfile"
+            },
+            "dev": true,
+            "servers": [],
+            "envVariables": {},
+            "links": [
+              {
+                "href": "ws://beta.codenvy.com/api/ws/workspacehk62905lvaz9qiao",
+                "parameters": [
+                  {
+                    "required": true,
+                    "name": "channel",
+                    "valid": [],
+                    "defaultValue": "workspacehk62905lvaz9qiao:MyAndroid:ws-machine"
+                  }
+                ],
+                "rel": "get machine logs channel",
+                "method": "GET"
+              },
+              {
+                "href": "ws://beta.codenvy.com/api/ws/workspacehk62905lvaz9qiao",
+                "parameters": [
+                  {
+                    "required": true,
+                    "name": "channel",
+                    "valid": [],
+                    "defaultValue": "machine:status:workspacehk62905lvaz9qiao:ws-machine"
+                  }
+                ],
+                "rel": "get machine status channel",
+                "method": "GET"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "links": [],
+        "name": "HelloWorld",
+        "attributes": {
+          "maven.artifactId": [
+            "mobile-android-java-basic"
+          ],
+          "maven.parent.version": [
+            ""
+          ],
+          "maven.test.source.folder": [
+            "src/test/java"
+          ],
+          "maven.version": [
+            "1.0-SNAPSHOT"
+          ],
+          "maven.parent.groupId": [
+            ""
+          ],
+          "languageVersion": [
+            "1.8.0_45"
+          ],
+          "language": [
+            "java"
+          ],
+          "contribute_to_branch": [
+            "master"
+          ],
+          "maven.source.folder": [
+            "src/main/java"
+          ],
+          "git.repository.remotes": [
+            "https://github.com/che-samples/mobile-android-hello-world.git"
+          ],
+          "maven.groupId": [
+            "com.codenvy.examples"
+          ],
+          "maven.packaging": [
+            "apk"
+          ],
+          "containsJavaFiles": [
+            "true"
+          ],
+          "vcs.provider.name": [
+            "git"
+          ],
+          "git.current.branch.name": [
+            "master"
+          ],
+          "maven.parent.artifactId": [
+            ""
+          ]
+        },
+        "type": "maven",
+        "source": {
+          "location": "https://github.com/che-samples/mobile-android-hello-world.git",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/HelloWorld",
+        "description": "hello",
+        "problems": [],
+        "mixins": [
+          "pullrequest",
+          "git"
+        ]
+      }
+    ],
+    "name": "MyAndroid",
+    "commands": [
+      {
+        "commandLine": "mvn clean install -f ${current.project.path}",
+        "name": "newMaven",
+        "attributes": {
+          "previewUrl": "http://${server.port.8080}/${current.project.relpath}"
+        },
+        "type": "mvn"
+      }
+    ],
+    "links": []
+  },
+  "links": [
+    {
+      "href": "http://beta.codenvy.com/api/workspace/workspacehk62905lvaz9qiao",
+      "parameters": [],
+      "rel": "self link",
+      "method": "GET"
+    },
+    {
+      "href": "http://beta.codenvy.com/api/workspace/workspacehk62905lvaz9qiao/runtime",
+      "parameters": [],
+      "rel": "start workspace",
+      "method": "POST",
+      "produces": "application/json"
+    },
+    {
+      "href": "http://beta.codenvy.com/api/workspace/workspacehk62905lvaz9qiao",
+      "parameters": [],
+      "rel": "remove workspace",
+      "method": "DELETE",
+      "produces": "application/json"
+    },
+    {
+      "href": "http://beta.codenvy.com/api/workspace",
+      "parameters": [],
+      "rel": "get all user workspaces",
+      "method": "GET",
+      "produces": "application/json"
+    },
+    {
+      "href": "http://beta.codenvy.com/api/workspace/workspacehk62905lvaz9qiao/snapshot",
+      "parameters": [],
+      "rel": "get workspace snapshot",
+      "method": "GET",
+      "produces": "application/json"
+    },
+    {
+      "href": "http://beta.codenvy.com/ws/MyAndroid",
+      "parameters": [],
+      "rel": "ide url",
+      "method": "GET",
+      "produces": "text/html"
+    },
+    {
+      "href": "ws://beta.codenvy.com/api/ws/workspacehk62905lvaz9qiao",
+      "parameters": [
+        {
+          "required": true,
+          "name": "channel",
+          "valid": [],
+          "defaultValue": "workspace:workspacehk62905lvaz9qiao"
+        }
+      ],
+      "rel": "get workspace events channel",
+      "method": "GET"
+    }
+  ]
+}

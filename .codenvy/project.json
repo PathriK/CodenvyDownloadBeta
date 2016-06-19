@@ -1,0 +1,1 @@
+{"mixinTypes":["factory"],"builders":{"configs":{},"default":"maven"},"runners":{"configs":{"system:/java/mobile/android442":{"ram":1000,"variables":{},"options":{}}},"default":"system:/java/mobile/android442"},"description":"Codenvy Download Beta","type":"maven","attributes":{"sourceFactoryId":["drsf4uuuqx94eq7r"],"languageVersion":["1.6"],"language":["java"]}}
