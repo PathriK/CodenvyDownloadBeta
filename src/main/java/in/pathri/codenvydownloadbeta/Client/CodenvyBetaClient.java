@@ -1,15 +1,5 @@
 package in.pathri.codenvydownloadbeta.Client;
 
-import okhttp3.OkHttpClient;
-import okhttp3.JavaNetCookieJar;
-import okhttp3.ResponseBody;
-
-import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseBeta;
-import in.pathri.codenvydownloadbeta.pojo.LoginData;
-import in.pathri.codenvydownloadbeta.pojo.ProjectDetails;
-import in.pathri.codenvydownloadbeta.pojo.CommandDetails;
-import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
-
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.ArrayList;
@@ -17,16 +7,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import retrofit2.Callback;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseBeta;
+import in.pathri.codenvydownloadbeta.pojo.CommandData;
+import in.pathri.codenvydownloadbeta.pojo.CommandDetails;
+import in.pathri.codenvydownloadbeta.pojo.LoginData;
+import in.pathri.codenvydownloadbeta.pojo.ProjectDetails;
+import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
+import okhttp3.JavaNetCookieJar;
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
-import retrofit2.http.Url;
 
 public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,CodenvyResponseBeta> {
     public final String BASE_URL = "http://beta.codenvy.com/api/";
@@ -34,7 +31,8 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
     private CodenvyApiService apiService;
   	 private boolean initialised = false;  
     private Map<String,CodenvyResponseBeta> workspaceDetailsMap;
-  
+    static String TAG = "CodenvyBetaClient";
+    
     private interface CodenvyApiService {
         //Login
         @POST("auth/login")
@@ -159,7 +157,7 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
   }
   
   public void getWorkspaceDetail(String wid, Callback <CodenvyResponseBeta> workspaceStatusHandler){
-        Call <CodenvyResponseBeta> workspaceDetailCall = apiService.getWorkspaceDetail();
+        Call <CodenvyResponseBeta> workspaceDetailCall = apiService.getWorkspaceDetail(wid);
         workspaceDetailCall.enqueue(workspaceStatusHandler);          
   }
   

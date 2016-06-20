@@ -2,21 +2,18 @@ package in.pathri.codenvydownloadbeta.responsehandlers;
 
 import java.util.List;
 
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import in.pathri.codenvydownloadbeta.CustomProgressDialog;
+import in.pathri.codenvydownloadbeta.HomePageActivity;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import okhttp3.ResponseBody;
-
-import android.view.View;
-import android.widget.ProgressBar;
-import android.util.Log;
-
-import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.CustomProgressDialog;
-import in.pathri.codenvydownloadbeta.HomePageActivity;
-
-abstract class ApiResponseHandler < T > implements Callback < T > {
+public abstract class ApiResponseHandler < T > implements Callback < T > {
   	 final String TAG = "CodenvyBeta_APIResponseHndler";
     final static String START = "start";
     final static String END = "end";
@@ -53,7 +50,7 @@ abstract class ApiResponseHandler < T > implements Callback < T > {
     
     abstract void updateStatusText(String statusText);
     
-    abstract void nextStep(CodenvyResponse codenvyResponse);
+    public abstract void nextStep(CodenvyResponse codenvyResponse);
     
     abstract void nextStep(List<CodenvyResponse> codenvyResponse);
     

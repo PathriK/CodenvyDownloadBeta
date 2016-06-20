@@ -1,30 +1,27 @@
 package in.pathri.codenvydownloadbeta.Client;
 
+import java.util.List;
+import java.util.Map;
+
 import android.util.Log;
-import in.pathri.codenvydownloadbeta.CustomProgressDialog;
-import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.pojo.LoginData;
-import in.pathri.codenvydownloadbeta.pojo.Servers;
+import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
+import in.pathri.codenvydownloadbeta.pojo.Servers;
+import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
 import in.pathri.codenvydownloadbeta.responsehandlers.ApkDownloadHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.BuildResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.LoginDialogResponseHandler;
+import in.pathri.codenvydownloadbeta.responsehandlers.LoginRefreshHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.LoginResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.ProjectResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.StatusResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.WorkspaceResponseHandler;
-import in.pathri.codenvydownloadbeta.responsehandlers.LoginRefreshHandler;
-
-import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
-import in.pathri.codenvydownloadbeta.HomePageActivity;
-
-import retrofit2.Callback;
-import java.util.List;
-import java.util.Map;
+import okhttp3.ResponseBody;
 
 public class CodenvyClient {
-  static CodenvyClientInterface currentInstance;
-  static CodenvyClientInterface prodInstance;
+  static CodenvyClientInterface<ResponseBody, CodenvyResponse> currentInstance;
+  static CodenvyClientInterface<ResponseBody, CodenvyResponse> prodInstance;
   static CodenvyClientInterface betaInsatnce;
   static List < CodenvyResponse > workspaceList;
   static Servers serverName;

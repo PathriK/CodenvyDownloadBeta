@@ -1,10 +1,11 @@
 package in.pathri.codenvydownloadbeta.responsehandlers;
 
-import okhttp3.ResponseBody;
+import java.util.List;
+
+import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.HomePageActivity;
-import java.util.List;
+import okhttp3.ResponseBody;
 
 public class LoginResponseHandler extends ApiResponseHandler<CodenvyResponse> {
     String wid,project;
@@ -14,7 +15,7 @@ public class LoginResponseHandler extends ApiResponseHandler<CodenvyResponse> {
     }
     
     @Override
-    void nextStep(CodenvyResponse codenvyResponses) {
+    public void nextStep(CodenvyResponse codenvyResponses) {
         CodenvyClient.buildProj();
     }
     

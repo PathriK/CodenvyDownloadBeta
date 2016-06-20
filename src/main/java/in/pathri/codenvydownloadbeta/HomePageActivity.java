@@ -1,11 +1,14 @@
 package in.pathri.codenvydownloadbeta;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -13,37 +16,13 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.ProgressBar;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.http.*;
-
-import okhttp3.ResponseBody;
-
-import org.apache.commons.io.IOUtils;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.prefs.Preferences;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Arrays;
-
-import in.pathri.codenvydownloadbeta.preferancehandlers.*;
-import in.pathri.codenvydownloadbeta.responsehandlers.*;
+import android.widget.TextView;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
-import in.pathri.codenvydownloadbeta.pojo.LoginData;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
+import in.pathri.codenvydownloadbeta.pojo.LoginData;
 import in.pathri.codenvydownloadbeta.pojo.Servers;
+import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
 
 public class HomePageActivity extends Activity {
     public static final Integer SUCCESS_CODE = 200;

@@ -1,16 +1,16 @@
 package in.pathri.codenvydownloadbeta.preferancehandlers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -19,28 +19,18 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.CustomProgressDialog;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
-import in.pathri.codenvydownloadbeta.pojo.ProjectDetails;
-import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.R;
-import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity.SetupFragment;
-import in.pathri.codenvydownloadbeta.responsehandlers.WorkspaceResponseHandler;
-import in.pathri.codenvydownloadbeta.responsehandlers.ProjectResponseHandler;
+import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
+import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.Servers;
 
 public class SetupActivity extends PreferenceActivity  {

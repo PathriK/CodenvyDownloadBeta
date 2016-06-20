@@ -1,4 +1,4 @@
-package in.pathri.codenvydownloadbeta.Client;
+package in.pathri.codenvydownloadbeta.pojo;
 
 public enum Channels {
   WORKSPACE_STATUS ("WorkspaceStatus","machine:status:_PARAM_:ws-machine");
@@ -6,7 +6,7 @@ public enum Channels {
   String channelName;
   String channel;
   
-  public Channels(String channelName, String channel){
+  private Channels(String channelName, String channel){
     this.channelName = channelName;
     this.channel = channel;
   }

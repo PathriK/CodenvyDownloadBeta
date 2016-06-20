@@ -1,7 +1,5 @@
 package in.pathri.codenvydownloadbeta.pojo;
 
-import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
-
 import java.util.List;
 
 public class CodenvyResponseBeta implements CodenvyResponse {
@@ -54,5 +52,10 @@ public class CodenvyResponseBeta implements CodenvyResponse {
   public String getName(){
     return this.name;
   }
+@Override
+public String getStatusCode() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }

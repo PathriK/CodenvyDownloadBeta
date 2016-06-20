@@ -1,9 +1,10 @@
 package in.pathri.codenvydownloadbeta.responsehandlers;
 
-import okhttp3.ResponseBody;
+import java.util.List;
+
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import in.pathri.codenvydownloadbeta.preferancehandlers.LoginPreference;
-import java.util.List;
+import okhttp3.ResponseBody;
 
 public class LoginDialogResponseHandler extends ApiResponseHandler<CodenvyResponse> {
     public LoginDialogResponseHandler(){
@@ -11,7 +12,7 @@ public class LoginDialogResponseHandler extends ApiResponseHandler<CodenvyRespon
     }
     
     @Override
-    void nextStep(CodenvyResponse codenvyResponses) {
+    public void nextStep(CodenvyResponse codenvyResponses) {
         LoginPreference.updateLoginStatus("NextStep");
         LoginPreference.acceptLogin();
     }

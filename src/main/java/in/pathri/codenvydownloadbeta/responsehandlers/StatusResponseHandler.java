@@ -3,13 +3,12 @@ package in.pathri.codenvydownloadbeta.responsehandlers;
 import java.util.Iterator;
 import java.util.List;
 
-import okhttp3.ResponseBody;
-
+import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.ResourceLinks;
+import okhttp3.ResponseBody;
 
 public class StatusResponseHandler extends ApiResponseHandler<CodenvyResponse> {
     String wid;
@@ -17,7 +16,7 @@ public class StatusResponseHandler extends ApiResponseHandler<CodenvyResponse> {
         super(HomePageActivity.buildSpinner,CodenvyResponse.class);
     }
     @Override
-    void nextStep(CodenvyResponse codenvyResponse) {
+    public void nextStep(CodenvyResponse codenvyResponse) {
         final CodenvyResponse currentResponse = codenvyResponse;
       final String respStatus = currentResponse.getStatus();
         if ("IN_QUEUE".equals(respStatus) || "IN_PROGRESS".equals(respStatus)) {

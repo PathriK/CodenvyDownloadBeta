@@ -1,12 +1,26 @@
 package in.pathri.codenvydownloadbeta.Client;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.Draft_17;
+import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import in.pathri.codenvydownloadbeta.Client.Channels;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import in.pathri.codenvydownloadbeta.pojo.Body;
+import in.pathri.codenvydownloadbeta.pojo.Channels;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseWS;
-
-import retrofit2.Callback;
+import in.pathri.codenvydownloadbeta.pojo.wsBodyDeserializer;
+import in.pathri.codenvydownloadbeta.responsehandlers.ApiResponseHandler;
 
 public class CodenvyBetaWSClient extends WebSocketClient{
   private static String BASE_URL = "ws://beta.codenvy.com/api/ws";
@@ -14,48 +28,59 @@ public class CodenvyBetaWSClient extends WebSocketClient{
   private static String CHANNEL_HEADER_VALUE = "subscribe-channel";
   
   private Channels channel;
-  private Callback <CodenvyResponseWS> responseHandler;
+  private ApiResponseHandler <CodenvyResponseWS> responseHandler;
   
   private static Table<String, Channels,CodenvyBetaWSClient> clientChannelMap = HashBasedTable.create();
   
-  public CodenvyBetaWSClient(String wid, Channels channel){
-    this.channel = channel;
-    super(new URI(BASE_URL + "/" + wid), new Draft_17());
+  public CodenvyBetaWSClient(String wid, Channels channel) throws URISyntaxException{
+	 super(new URI(BASE_URL + "/" + wid), new Draft_17());
+    this.channel = channel;    
   }
   
   public static CodenvyBetaWSClient getInstance(String wid, Channels channel){
     if(!clientChannelMap.contains(wid,channel)){
-      clientChannelMap.put(wid,channel,new CodenvyBetaWSClient(wid,channel));
+      try {
+		clientChannelMap.put(wid,channel,new CodenvyBetaWSClient(wid,channel));
+	} catch (URISyntaxException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
     
     return clientChannelMap.get(wid, channel);
     
   }
   
-  public void initChannel(String param, ApiResponseHandler responseHandler){
+  public void initChannel(String param, ApiResponseHandler <CodenvyResponseWS> responseHandler){
     
     this.responseHandler = responseHandler;
     
     JSONObject headersObj = new JSONObject();
-    headersObj.putOpt("name",CHANNEL_HEADER_NAME);
-    headersObj.putOpt("value",CHANNEL_HEADER_VALUE);
+    try {
+		headersObj.putOpt("name",CHANNEL_HEADER_NAME);
+	    headersObj.putOpt("value",CHANNEL_HEADER_VALUE);
+	
+	    JSONArray headersArr = new JSONArray();
+	    headersArr.put(headersObj);
+	    
+	    JSONObject bodyObj = new JSONObject();
+	    bodyObj.putOpt("channel",channel.getChannel(param));
+	    
+	    JSONObject msgObj = new JSONObject();
+	    msgObj.putOpt("method","POST");
+	    msgObj.putOpt("headers",headersArr);
+	    msgObj.putOpt("body",bodyObj.toString());
+	    
+	    String msg = msgObj.toString();
+	    
+	    System.out.println("Message: " + msg);
+	       
+	    this.send(msg);    
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
-    JSONArray headersArr = new JSONArray();
-    headersArr.put(headersObj);
-    
-    JSONObject bodyObj = new JSONObject();
-    bodyObj.putOpt("channel",channel.getChannel(param));
-    
-    JSONObject msgObj = new JSONObject();
-    msgObj.putOpt("method","POST");
-    msgObj.putOpt("headers",headersArr);
-    msgObj.putOpt("body",bodyObj.toString());
-    
-    String msg = msgObj.toString();
-    
-    System.out.println("Message: " + msg);
-       
-    this.send(msg);    
   }
   
   	@Override

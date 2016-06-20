@@ -1,23 +1,15 @@
 package in.pathri.codenvydownloadbeta.responsehandlers;
 
-import java.util.Iterator;
 import java.util.List;
 
-import okhttp3.ResponseBody;
-
-import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
-import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
-import in.pathri.codenvydownloadbeta.pojo.ResourceLinks;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
+import okhttp3.ResponseBody;
 
 public class VoidResponseHandler extends ApiResponseHandler<ResponseBody> {
 
     public VoidResponseHandler(){
         super(HomePageActivity.buildSpinner,ResponseBody.class);
-    }
-    @Override
-    void nextStep(ResponseBody responseBody) {
-       
     }
     
     @Override
@@ -43,4 +35,9 @@ public class VoidResponseHandler extends ApiResponseHandler<ResponseBody> {
     void nextStep(List<CodenvyResponse> codenvyResponses) {
         HomePageActivity.updateTriggerStatusText("Application Error!!");
     }
+
+	@Override
+	public 	void nextStep(CodenvyResponse codenvyResponse) {
+		HomePageActivity.updateStatusText("Application Error!!");		
+	}
 }

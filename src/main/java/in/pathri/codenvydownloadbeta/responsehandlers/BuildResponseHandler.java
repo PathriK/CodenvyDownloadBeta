@@ -1,11 +1,12 @@
 package in.pathri.codenvydownloadbeta.responsehandlers;
 
-import okhttp3.ResponseBody;
-import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
-import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.pojo.AppData;
-import in.pathri.codenvydownloadbeta.HomePageActivity;
 import java.util.List;
+
+import in.pathri.codenvydownloadbeta.HomePageActivity;
+import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
+import in.pathri.codenvydownloadbeta.pojo.AppData;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
+import okhttp3.ResponseBody;
 
 public class BuildResponseHandler extends ApiResponseHandler<CodenvyResponse>{
     public BuildResponseHandler(){      
@@ -13,7 +14,7 @@ public class BuildResponseHandler extends ApiResponseHandler<CodenvyResponse>{
     }
     
     @Override
-    void nextStep(CodenvyResponse codenvyResponse) {
+    public void nextStep(CodenvyResponse codenvyResponse) {
       	String taskId = codenvyResponse.getTaskId();
         this.updateStatusText("TaskID:" + taskId);
         AppData.setBuildTaskId(taskId);

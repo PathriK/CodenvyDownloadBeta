@@ -1,9 +1,10 @@
 package in.pathri.codenvydownloadbeta.Client;
 
-import in.pathri.codenvydownloadbeta.pojo.LoginData;
-import retrofit2.Callback;
 import java.util.List;
 import java.util.Map;
+
+import in.pathri.codenvydownloadbeta.pojo.LoginData;
+import retrofit2.Callback;
 
 public interface CodenvyClientInterface<T,U> {  
   void apiInit();

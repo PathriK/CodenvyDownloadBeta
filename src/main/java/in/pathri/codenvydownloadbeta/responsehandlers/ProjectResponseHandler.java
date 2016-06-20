@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.CustomProgressDialog;
-import in.pathri.codenvydownloadbeta.pojo.WorkspaceDetails;
 import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
+import okhttp3.ResponseBody;
 
 public class ProjectResponseHandler extends ApiResponseHandler <List<CodenvyResponse>>{
     private String wid;
@@ -47,7 +45,7 @@ public class ProjectResponseHandler extends ApiResponseHandler <List<CodenvyResp
     }      
     
     @Override
-    void nextStep(CodenvyResponse arg0) {
+    public void nextStep(CodenvyResponse arg0) {
         updateStatusText("Application Error!!");
     }
     

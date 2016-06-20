@@ -3,12 +3,12 @@ package in.pathri.codenvydownloadbeta.responsehandlers;
 import java.util.Iterator;
 import java.util.List;
 
-import okhttp3.ResponseBody;
-
+import in.pathri.codenvydownloadbeta.HomePageActivity;
+import in.pathri.codenvydownloadbeta.Client.CodenvyBetaClientAdapter;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.ResourceLinks;
+import okhttp3.ResponseBody;
 
 public class WorkspaceStatusHandler extends ApiResponseHandler<CodenvyResponse> {
     String wid;
@@ -19,7 +19,7 @@ public class WorkspaceStatusHandler extends ApiResponseHandler<CodenvyResponse> 
       this.clientImpl = clientImpl;
     }
     @Override
-    void nextStep(CodenvyResponse codenvyResponse) {
+    public void nextStep(CodenvyResponse codenvyResponse) {
         final CodenvyResponse currentResponse = codenvyResponse;
       final String respStatus = currentResponse.getStatus();
         if ("STOPPED".equals(respStatus)) {

@@ -1,7 +1,5 @@
 package in.pathri.codenvydownloadbeta.pojo;
 
-import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
-
 import java.util.List;
 
 public class CodenvyResponseWS implements CodenvyResponse {

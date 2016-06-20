@@ -1,20 +1,18 @@
 package in.pathri.codenvydownloadbeta.Client;
 
-import okhttp3.OkHttpClient;
-import okhttp3.JavaNetCookieJar;
-import okhttp3.ResponseBody;
-
-import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseProd;
-import in.pathri.codenvydownloadbeta.pojo.LoginData;
-import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
-
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.List;
 import java.util.Map;
 
-import retrofit2.Callback;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseProd;
+import in.pathri.codenvydownloadbeta.pojo.LoginData;
+import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
+import okhttp3.JavaNetCookieJar;
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;

@@ -1,32 +1,15 @@
 package in.pathri.codenvydownloadbeta.Client;
 
-import okhttp3.OkHttpClient;
-import okhttp3.JavaNetCookieJar;
-import okhttp3.ResponseBody;
-
-import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseBeta;
-import in.pathri.codenvydownloadbeta.pojo.LoginData;
-import in.pathri.codenvydownloadbeta.pojo.ProjectDetails;
-import in.pathri.codenvydownloadbeta.pojo.CommandDetails;
-import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
-
-import java.net.CookieManager;
-import java.net.CookiePolicy;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import in.pathri.codenvydownloadbeta.pojo.Channels;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseBeta;
+import in.pathri.codenvydownloadbeta.pojo.LoginData;
+import in.pathri.codenvydownloadbeta.responsehandlers.VoidResponseHandler;
+import in.pathri.codenvydownloadbeta.responsehandlers.WorkspaceStatusHandler;
+import okhttp3.ResponseBody;
 import retrofit2.Callback;
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
-import retrofit2.http.Url;
 
 public class CodenvyBetaClientAdapter implements CodenvyClientInterface<ResponseBody,CodenvyResponseBeta> {
   CodenvyBetaClient betaClient;
@@ -50,7 +33,7 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
     public void startWorkspace(String workspaceId){
       betaWSClient = CodenvyBetaWSClient.getInstance(workspaceId,Channels.WORKSPACE_STATUS);
       betaWSClient.initChannel(workspaceId, new WorkspaceStatusHandler(workspaceId, this));
-      betaClient.startWorkspace(workspaceId, new voidResponseHandler());
+      betaClient.startWorkspace(workspaceId, new VoidResponseHandler());
     }
     
     public void buildStatus(String workspaceId, String buildId, Callback < CodenvyResponseBeta > statusResponseHandler) {
@@ -75,11 +58,11 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
  betaClient.getCommandDetails(wid);
   }
   	public String getCurrentURL(){
-     betaClient.getCurrentURL();
+     return betaClient.getCurrentURL();
    }
   
   public boolean isInitialised(){
-    betaClient.isInitialised();
+    return betaClient.isInitialised();
   }
   
   public void setWorkspaceList(Map < String, CodenvyResponseBeta > workspaceList){

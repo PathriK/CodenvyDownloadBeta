@@ -1,19 +1,17 @@
 package in.pathri.codenvydownloadbeta.responsehandlers;
 
-import android.content.Context;
-import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.HomePageActivity;
-import java.util.List;
-
-import okhttp3.ResponseBody;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
-import in.pathri.codenvydownloadbeta.pojo.AppData;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+
+import android.content.Context;
+import in.pathri.codenvydownloadbeta.HomePageActivity;
+import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
+import in.pathri.codenvydownloadbeta.pojo.AppData;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
+import okhttp3.ResponseBody;
 
 public class ApkDownloadHandler extends ApiResponseHandler<ResponseBody>{
         
@@ -39,7 +37,7 @@ public class ApkDownloadHandler extends ApiResponseHandler<ResponseBody>{
     }
     
     @Override
-    void nextStep(CodenvyResponse codenvyResponses) {
+    public void nextStep(CodenvyResponse codenvyResponses) {
         HomePageActivity.updateTriggerStatusText("Application Error!!");
     }
   
