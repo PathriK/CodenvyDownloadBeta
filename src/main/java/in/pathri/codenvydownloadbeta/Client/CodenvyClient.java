@@ -7,6 +7,8 @@ import android.util.Log;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseBeta;
+import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseProd;
 import in.pathri.codenvydownloadbeta.pojo.Servers;
 import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
 import in.pathri.codenvydownloadbeta.responsehandlers.ApkDownloadHandler;
@@ -20,9 +22,9 @@ import in.pathri.codenvydownloadbeta.responsehandlers.WorkspaceResponseHandler;
 import okhttp3.ResponseBody;
 
 public class CodenvyClient {
-  static CodenvyClientInterface<ResponseBody, CodenvyResponse> currentInstance;
-  static CodenvyClientInterface<ResponseBody, CodenvyResponse> prodInstance;
-  static CodenvyClientInterface betaInsatnce;
+  static CodenvyClientInterface<ResponseBody, ? extends CodenvyResponse> currentInstance;
+  static CodenvyClientInterface<ResponseBody, CodenvyResponseProd> prodInstance;
+  static CodenvyClientInterface<ResponseBody, CodenvyResponseBeta> betaInsatnce;
   static List < CodenvyResponse > workspaceList;
   static Servers serverName;
   static String TAG = "CodenvyBeta";
