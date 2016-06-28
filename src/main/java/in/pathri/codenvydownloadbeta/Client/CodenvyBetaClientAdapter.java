@@ -27,7 +27,7 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
     
     public void buildProj(String workspaceId, String project, String command, Callback < CodenvyResponseBeta > buildResponseHandler) {
       	betaClient.getWorkspaceDetail(workspaceId, new WorkspaceStatusHandler(workspaceId, this));
-			betaClient.buildProj(workspaceId,project,command,buildResponseHandler);
+//			betaClient.buildProj(workspaceId,project,command,buildResponseHandler);
     }
   
     public void startWorkspace(String workspaceId){

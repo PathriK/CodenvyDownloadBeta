@@ -9,8 +9,9 @@ import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import in.pathri.codenvydownloadbeta.pojo.ResourceLinks;
 import okhttp3.ResponseBody;
+import retrofit2.Callback;
 
-public class WorkspaceStatusHandler extends ApiResponseHandler<CodenvyResponse> {
+public class WorkspaceStatusHandler<Z extends CodenvyResponse> extends ApiResponseHandler<CodenvyResponse> {
     String wid;
   	CodenvyBetaClientAdapter clientImpl;
     public WorkspaceStatusHandler(String wid, CodenvyBetaClientAdapter clientImpl){
@@ -23,23 +24,12 @@ public class WorkspaceStatusHandler extends ApiResponseHandler<CodenvyResponse> 
         final CodenvyResponse currentResponse = codenvyResponse;
       final String respStatus = currentResponse.getStatus();
         if ("STOPPED".equals(respStatus)) {
-          clientImpl.startWorkspace(wid);
-          
-            this.updateStatusText(respStatus);
-        } else if ("FAILED".equals(respStatus)) {
+          clientImpl.startWorkspace(wid);          
+          this.updateStatusText(respStatus);          
+        } else if ("CREATING".equals(respStatus)) {        	
         this.updateStatusText(respStatus);
-        } else if ("SUCCESSFUL".equals(respStatus)) {
-        this.updateStatusText(respStatus);
-        List < ResourceLinks > linksList = currentResponse.getLinks();
-        Iterator < ResourceLinks > iterator = linksList.iterator();
-        while (iterator.hasNext()) {
-            ResourceLinks resourceLink = iterator.next();
-            if ("download result".equals(resourceLink.rel)) {
-                String downloadURL = resourceLink.href;
-                CodenvyClient.getAPK();
-                break;
-            }
-        }
+        } else if ("RUNNING".equals(respStatus)) {
+       //
         } else {
         	this.updateStatusText("Build Status Unknown" + respStatus);
    	 }

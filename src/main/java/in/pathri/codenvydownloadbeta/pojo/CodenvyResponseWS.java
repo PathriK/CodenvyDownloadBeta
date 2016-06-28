@@ -14,7 +14,7 @@ public class CodenvyResponseWS implements CodenvyResponse {
   }
   
   public String getId(){
-    return "";
+    return this.body.getMachineId();
   }
   
   public String getMessage(){

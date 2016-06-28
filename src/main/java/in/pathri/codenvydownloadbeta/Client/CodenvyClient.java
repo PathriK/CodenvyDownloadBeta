@@ -20,11 +20,12 @@ import in.pathri.codenvydownloadbeta.responsehandlers.ProjectResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.StatusResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.WorkspaceResponseHandler;
 import okhttp3.ResponseBody;
+import retrofit2.Callback;
 
 public class CodenvyClient {
-  static CodenvyClientInterface<ResponseBody, ? extends CodenvyResponse> currentInstance;
-  static CodenvyClientInterface<ResponseBody, CodenvyResponseProd> prodInstance;
-  static CodenvyClientInterface<ResponseBody, CodenvyResponseBeta> betaInsatnce;
+  static CodenvyClientInterface currentInstance;
+  static CodenvyClientInterface prodInstance;
+  static CodenvyClientInterface betaInsatnce;
   static List < CodenvyResponse > workspaceList;
   static Servers serverName;
   static String TAG = "CodenvyBeta";

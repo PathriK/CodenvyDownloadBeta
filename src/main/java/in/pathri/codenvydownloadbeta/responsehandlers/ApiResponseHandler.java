@@ -26,7 +26,7 @@ public abstract class ApiResponseHandler < T > implements Callback < T > {
     }
     ResponseType responseType = ResponseType.BINARY;
     
-    ApiResponseHandler(ProgressBar spinner, Class < T > clazz) {
+    ApiResponseHandler(ProgressBar spinner, Class < ? > clazz) {
         this.spinner = spinner;
         updateProgress(START);
         if (CodenvyResponse.class.equals(clazz)) {
@@ -34,7 +34,7 @@ public abstract class ApiResponseHandler < T > implements Callback < T > {
         }
     }
 
-    ApiResponseHandler(CustomProgressDialog pd, Class < T > clazz){
+    ApiResponseHandler(CustomProgressDialog pd, Class < ? > clazz){
         this.pd = pd;
         updateProgress(START);
         if (CodenvyResponse.class.equals(clazz)) {
@@ -48,7 +48,7 @@ public abstract class ApiResponseHandler < T > implements Callback < T > {
         this.responseType = ResponseType.ARRAY;
     }
     
-    abstract void updateStatusText(String statusText);
+	abstract void updateStatusText(String statusText);
     
     public abstract void nextStep(CodenvyResponse codenvyResponse);
     
