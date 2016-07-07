@@ -40,7 +40,7 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
         
         //Build
         @POST("machine/{machineId}/command")
-        Call < CodenvyResponseBeta > buildProj(@Path("machineId") String machineId, @Body CommandData command);
+        Call < ResponseBody > buildProj(@Path("machineId") String machineId, @Body CommandData command);
         
 //         //Build Status
 //         @GET("builder/{wid}/status/{id}")
@@ -97,12 +97,12 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
         loginCall.enqueue(loginResponseHandler);
     }
     
-    public void buildProj(String workspaceId, String project, String command, Callback < CodenvyResponseBeta > buildResponseHandler) {
+    public void buildProj(String workspaceId, String project, CommandData command,  Callback <ResponseBody> voidResponseHandler) {
 //         Prepare the HTTP request
-        Call < CodenvyResponseBeta > buildCall = apiService.buildProj(workspaceId, project);
+        Call < CodenvyResponseBeta > buildCall = apiService.buildProj(workspaceId, command);
         
 //         Asynchronously execute HTTP request
-        buildCall.enqueue(buildResponseHandler);
+        buildCall.enqueue(voidResponseHandler);
     }
     
     public void buildStatus(String workspaceId, String buildId, Callback < CodenvyResponseBeta > statusResponseHandler) {
@@ -113,9 +113,9 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
         statusCall.enqueue(statusResponseHandler);
     }
     
-    public void getAPK(String apkUrl, Callback < ResponseBody > apkDownloadHandler) {
+    public void getAPK(String machineId, String apkPath, Callback < ResponseBody > apkDownloadHandler) {
         // Prepare the HTTP request
-        Call < ResponseBody > getApkCall = apiService.getAPK(apkUrl);
+        Call < ResponseBody > getApkCall = apiService.getAPK(machineId, apkPath);
         
         // Asynchronously execute HTTP request
         getApkCall.enqueue(apkDownloadHandler);
@@ -177,4 +177,10 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
   public void setWorkspaceList(Map < String, CodenvyResponseBeta > workspaceList){
     this.workspaceDetailsMap = workspaceList;
   }
+
+@Override
+public void buildProj(String workspaceId, String project, Callback<CodenvyResponseBeta> buildResponseHandler) {
+	System.out.println("Not Supported");
+	
+}
 }

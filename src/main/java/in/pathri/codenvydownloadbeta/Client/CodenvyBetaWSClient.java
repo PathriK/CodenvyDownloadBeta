@@ -75,12 +75,20 @@ public class CodenvyBetaWSClient extends WebSocketClient{
 	    
 	    System.out.println("Message: " + msg);
 	       
-	    this.send(msg);    
+	    this.send(msg); 	    
 	} catch (JSONException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 
+  }
+  
+  public void closeChannel(){
+	  this.close();
+  }
+  
+  public void closeAllChannel(){
+	  
   }
   
   	@Override
@@ -97,7 +105,7 @@ public class CodenvyBetaWSClient extends WebSocketClient{
       builder.registerTypeAdapter(Body.class, new wsBodyDeserializer());
       Gson gson = builder.create();
 
-      CodenvyResponse response = gson.fromJson(message, CodenvyResponseWS.class);
+      CodenvyResponse response = gson.fromJson(message, channel.getResponseClass());
      if(response.getStatusCode().equals("0")){
        this.responseHandler.nextStep(response);
      }

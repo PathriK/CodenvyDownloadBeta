@@ -7,17 +7,16 @@ import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.Client.CodenvyBetaClientAdapter;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
+import in.pathri.codenvydownloadbeta.pojo.BuildStatus;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import in.pathri.codenvydownloadbeta.pojo.ResourceLinks;
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
-public class WorkspaceStatusHandler<Z extends CodenvyResponse> extends ApiResponseHandler<CodenvyResponse> {
-    String wid;
+public class BuildStatusHandler<Z extends CodenvyResponse> extends ApiResponseHandler<CodenvyResponse> {
   	CodenvyBetaClientAdapter clientImpl;
-    public WorkspaceStatusHandler(String wid, CodenvyBetaClientAdapter clientImpl){
+    public BuildStatusHandler(CodenvyBetaClientAdapter clientImpl){
       super(HomePageActivity.buildSpinner,CodenvyResponse.class);
-      this.wid = wid;
       this.clientImpl = clientImpl;
     }
     @Override
@@ -25,13 +24,12 @@ public class WorkspaceStatusHandler<Z extends CodenvyResponse> extends ApiRespon
         final CodenvyResponse currentResponse = codenvyResponse;
       final String respStatus = currentResponse.getStatus();
         if ("STOPPED".equals(respStatus)) {
-          clientImpl.startWorkspace(wid);          
+        	AppData.setBuildStatus(BuildStatus.COMPLETED);
+          clientImpl.checkCompletion();
           this.updateStatusText(respStatus);          
-        } else if ("CREATING".equals(respStatus)) {        	
-        this.updateStatusText(respStatus);
-        } else if ("RUNNING".equals(respStatus)) {
-        	AppData.setMachineId(currentResponse.getId());
-        	clientImpl.triggerBuild();
+        } else if ("STARTED".equals(respStatus)) {
+        	AppData.setBuildStatus(BuildStatus.STARTED);
+        	this.updateStatusText(respStatus);
         } else {
         	this.updateStatusText("Build Status Unknown" + respStatus);
    	 }

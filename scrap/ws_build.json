@@ -1,0 +1,136 @@
+{"method":"POST","headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"body":"{\"channel\":\"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A\"}"}
+{"headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"method":"POST","responseCode":200,"body":"{\"channel\":\"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A\"}"}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [INFO] Scanning for projects...\""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR] [ERROR] Some problems were encountered while processing the POMs:\""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [FATAL] Non-readable POM /projects/clean: /projects/clean (No such file or directory) @ \""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT]  @ \""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR] The build could not read 1 project -> [Help 1]\""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR]   \""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR]   The project  (/projects/clean) has 1 error\""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR]     Non-readable POM /projects/clean: /projects/clean (No such file or directory)\""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR] \""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR] Re-run Maven using the -X switch to enable full debug logging.\""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR] \""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR] For more information about the errors and possible solutions, please read the following articles:\""}
+{"headers":[{"name":"x-everrest-websocket-channel","value":"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A"},{"name":"x-everrest-websocket-message-type","value":"none"}],"responseCode":0,"body":"\"[STDOUT] [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException\""}
+
+
+mvn -f /projects/HelloWorld clean installpreview:http://${server.port.8080}/HelloWorld
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Codenvy Android Example 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.jar (25 KB at 707.5 KB/sec)
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mobile-android-java-basic ---
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.6/maven-plugin-api-2.0.6.pom
+[INFO] Deleting /projects/HelloWorld/target
+[INFO] 
+[INFO] --- android-maven-plugin:4.0.0-rc.2:generate-sources (default-generate-sources) @ mobile-android-java-basic ---
+[INFO] Extracting libs
+[INFO] Generating R file for com.codenvy.examples:mobile-android-java-basic:apk:1.0-SNAPSHOT
+[INFO] Adding R gen folder to compile classpath: /projects/HelloWorld/target/generated-sources/r
+[INFO] Adding AIDL gen folder to compile classpath: /projects/HelloWorld/target/generated-sources/aidl
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:resources (default-resources) @ mobile-android-java-basic ---
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.24/plexus-utils-3.0.24.jar (242 KB at 547.7 KB/sec)
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /projects/HelloWorld/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:compile (default-compile) @ mobile-android-java-basic ---
+Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/2.0.4/plexus-utils-2.0.4.jar (217 KB at 1583.4 KB/sec)
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /projects/HelloWorld/target/classes
+[INFO] 
+[INFO] --- android-maven-plugin:4.0.0-rc.2:proguard (default-proguard) @ mobile-android-java-basic ---
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:testResources (default-testResources) @ mobile-android-java-basic ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /projects/HelloWorld/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:testCompile (default-testCompile) @ mobile-android-java-basic ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.19.1:test (default-test) @ mobile-android-java-basic ---
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/maven-surefire-common/2.19.1/maven-surefire-common-2.19.1.pom
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/maven-surefire-common/2.19.1/maven-surefire-common-2.19.1.pom (8 KB at 298.4 KB/sec)
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- android-maven-plugin:4.0.0-rc.2:emma (default-emma) @ mobile-android-java-basic ---
+[INFO] 
+[INFO] --- android-maven-plugin:4.0.0-rc.2:dex (default-dex) @ mobile-android-java-basic ---
+[INFO] Convert classes to Dex : /projects/HelloWorld/target/classes.dex
+[INFO] 
+[INFO] --- maven-jar-plugin:3.0.2:jar (default-jar) @ mobile-android-java-basic ---
+Downloaded: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.11/commons-compress-1.11.jar (416 KB at 1506.0 KB/sec)
+[INFO] Building jar: /projects/HelloWorld/target/mobile-android-java-basic.jar
+[INFO] 
+[INFO] --- android-maven-plugin:4.0.0-rc.2:apk (default-apk) @ mobile-android-java-basic ---
+[INFO] Generating debug apk.
+[INFO] Adding native libraries : []
+[INFO] 
+[INFO] --- android-maven-plugin:4.0.0-rc.2:internal-pre-integration-test (default-internal-pre-integration-test) @ mobile-android-java-basic ---
+[INFO] No InstrumentationRunner found - skipping tests
+[INFO] 
+[INFO] --- android-maven-plugin:4.0.0-rc.2:internal-integration-test (default-internal-integration-test) @ mobile-android-java-basic ---
+[INFO] No InstrumentationRunner found - skipping tests
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ mobile-android-java-basic ---
+Downloading: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.6/commons-codec-1.6.pom
+[INFO] Installing /projects/HelloWorld/target/mobile-android-java-basic.apk to /home/user/.m2/repository/com/codenvy/examples/mobile-android-java-basic/1.0-SNAPSHOT/mobile-android-java-basic-1.0-SNAPSHOT.apk
+[INFO] Installing /projects/HelloWorld/pom.xml to /home/user/.m2/repository/com/codenvy/examples/mobile-android-java-basic/1.0-SNAPSHOT/mobile-android-java-basic-1.0-SNAPSHOT.pom
+[INFO] Installing /projects/HelloWorld/target/mobile-android-java-basic.jar to /home/user/.m2/repository/com/codenvy/examples/mobile-android-java-basic/1.0-SNAPSHOT/mobile-android-java-basic-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12.969 s
+[INFO] Finished at: 2016-07-07T13:38:23+00:00
+[INFO] Final Memory: 26M/510M
+[INFO] ------------------------------------------------------------------------
+////////////////////////////////////////////////
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Codenvy Android Example 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ mobile-android-java-basic ---
+[INFO] Deleting /projects/HelloWorld/target
+[INFO] 
+[INFO] --- android-maven-plugin:4.0.0-rc.2:generate-sources (default-generate-sources) @ mobile-android-java-basic ---
+[INFO] Extracting libs
+[INFO] Generating R file for com.codenvy.examples:mobile-android-java-basic:apk:1.0-SNAPSHOT
+[INFO] Adding R gen folder to compile classpath: /projects/HelloWorld/target/generated-sources/r
+[INFO] Adding AIDL gen folder to compile classpath: /projects/HelloWorld/target/generated-sources/aidl
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:resources (default-resources) @ mobile-android-java-basic ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /projects/HelloWorld/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:compile (default-compile) @ mobile-android-java-basic ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /projects/HelloWorld/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /projects/HelloWorld/src/main/java/com/codenvy/template/android/HelloAndroidActivity.java:[7,8] class HelloAndroidActvity is public, should be declared in a file named HelloAndroidActvity.java
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3.253 s
+[INFO] Finished at: 2016-07-07T13:41:22+00:00
+[INFO] Final Memory: 25M/427M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.5.1:compile (default-compile) on project mobile-android-java-basic: Compilation failure
+[ERROR] /projects/HelloWorld/src/main/java/com/codenvy/template/android/HelloAndroidActivity.java:[7,8] class HelloAndroidActvity is public, should be declared in a file named HelloAndroidActvity.java
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

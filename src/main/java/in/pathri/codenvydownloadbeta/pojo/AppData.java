@@ -1,14 +1,25 @@
 package in.pathri.codenvydownloadbeta.pojo;
 
+import java.util.UUID;  
+
+import java.util.List;
+
+import com.google.common.base.Joiner;
+
 public class AppData {
   private static LoginData loginData;
   private static String workspaceName;
   private static String workspaceId;
   private static String project;
-  private static String command;
+  private static CommandData command;
   private static String buildTaskId;
   private static String apkUrl;
   private static String apkPath;  
+  private static String machineId;
+  private static String guidString;
+  private static BuildResult buildResult;
+  private static BuildStatus buildStatus;
+  private static List<String> buildOutput;
   
   public static LoginData getLoginData(){
     return loginData;
@@ -26,7 +37,7 @@ public class AppData {
     return project;
   }
 
-  public static String getCommand(){
+  public static CommandData getCommand(){
     return command;
   }
 
@@ -46,6 +57,27 @@ public class AppData {
     return "CodenvyDownload-" + buildTaskId + ".apk";
   }
   
+  public static String getMachineId(){
+	  return machineId;	  
+  }
+  
+  public static String getGUID(){
+	  return guidString;
+  }
+  
+  public static BuildResult getBuildResult() {
+	  return buildResult;	
+  }
+  
+  public static BuildStatus getBuildStatus() {
+	  return buildStatus;
+  }
+  
+  public static String getBuildOutput(){
+	  return Joiner.on(System.getProperty("line.separator")).join(buildOutput);
+  }
+  
+  
 //Setters  
   public static void setLoginData(LoginData loginData){
     AppData.loginData = loginData;
@@ -63,7 +95,7 @@ public class AppData {
     AppData.project = project;
   }
 
-  public static void setCommand(String command){
+  public static void setCommand(CommandData command){
     AppData.command = command;
   }
 
@@ -78,5 +110,38 @@ public class AppData {
   public static void setApkPath(String apkPath){
     AppData.apkPath = apkPath;
   }   
+
+  public static void setMachineId(String machineId){
+	    AppData.machineId = machineId;
+  }
+
+  public static void setBuildResult(BuildResult buildResult) {
+		AppData.buildResult = buildResult;	
+  }
+
+  public static void setBuildStatus(BuildStatus buildStatus) {
+		AppData.buildStatus = buildStatus;	
+  }
   
+  public static void addBuildOutput(String line){
+	  AppData.buildOutput.add(line);
+  }
+  
+  //Generators
+  public static void generateGUID(){
+	   UUID uuid = UUID.randomUUID();
+	   AppData.guidString = uuid.toString();
+  }
+  
+  public static void clearAll(){
+	  workspaceName=workspaceId=project=buildTaskId=apkUrl=apkPath=machineId=guidString="";
+	  buildOutput.clear();
+	  buildResult = BuildResult.NOT_SET;
+	  buildStatus = BuildStatus.NOT_STARTED;
+	  loginData = null;
+	  command = null;
+  }
+
+
+
 }

@@ -103,7 +103,7 @@ public class CodenvyProdClient implements CodenvyClientInterface<ResponseBody,Co
         statusCall.enqueue(statusResponseHandler);
     }
     
-    public void getAPK(String apkUrl, Callback < ResponseBody > apkDownloadHandler) {
+    public void getAPK(String machineId, String apkUrl, Callback < ResponseBody > apkDownloadHandler) {
         // Prepare the HTTP request
         Call < ResponseBody > getApkCall = apiService.getAPK(apkUrl);
         

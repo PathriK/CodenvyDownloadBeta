@@ -25,3 +25,15 @@ x-everrest-websocket-channel
 
 {"method":"POST","headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"body":"{\"channel\":\"machine:status:workspacehk62905lvaz9qiao:ws-machine\"}"}
 WSMachine.json
+
+{
+  "commandLine": "mvn -f clean install",
+  "type": "mvn",
+  "attributes": {},
+  "name": "newMaven"
+}
+{"method":"POST","headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"body":"{\"channel\":\"process:output:DFB6572F-F7B5-472E-9GF5-7FA2A3B89A4A\"}"}
+ws_build.json
+machine process status
+{"method":"POST","headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"body":"{\"channel\":\"machine:process:machine1708ratuk96zkbhi\"}"}
+process_status
