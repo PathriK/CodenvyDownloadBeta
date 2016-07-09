@@ -7,8 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseBeta;
-import in.pathri.codenvydownloadbeta.pojo.CommandData;
+import in.pathri.codenvydownloadbeta.pojo.CommandDetails;
 import in.pathri.codenvydownloadbeta.pojo.CommandDetails;
 import in.pathri.codenvydownloadbeta.pojo.LoginData;
 import in.pathri.codenvydownloadbeta.pojo.ProjectDetails;
@@ -40,7 +41,7 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
         
         //Build
         @POST("machine/{machineId}/command")
-        Call < ResponseBody > buildProj(@Path("machineId") String machineId, @Body CommandData command);
+        Call < ResponseBody > buildProj(@Path("machineId") String machineId, @Body CommandDetails command);
         
 //         //Build Status
 //         @GET("builder/{wid}/status/{id}")
@@ -64,7 +65,7 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
       
       	//Start Workspace
       	@POST("workspace/{wid}/runtime")
-      	Call <CodenvyResponseBeta> startWorkspace(@Path("wid") String workspaceId);
+      	Call <ResponseBody> startWorkspace(@Path("wid") String workspaceId);
     }
     
     public void apiInit() {
@@ -97,20 +98,21 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
         loginCall.enqueue(loginResponseHandler);
     }
     
-    public void buildProj(String workspaceId, String project, CommandData command,  Callback <ResponseBody> voidResponseHandler) {
+    public void buildProj(String workspaceId, String project, CommandDetails command,  Callback <ResponseBody> voidResponseHandler) {
 //         Prepare the HTTP request
-        Call < CodenvyResponseBeta > buildCall = apiService.buildProj(workspaceId, command);
+        Call < ResponseBody > buildCall = apiService.buildProj(workspaceId, command);
         
 //         Asynchronously execute HTTP request
         buildCall.enqueue(voidResponseHandler);
     }
     
     public void buildStatus(String workspaceId, String buildId, Callback < CodenvyResponseBeta > statusResponseHandler) {
-        // Prepare the HTTP request
-        Call < CodenvyResponseBeta > statusCall = apiService.buildStatus(workspaceId, buildId);
+//         // Prepare the HTTP request
+//         Call < CodenvyResponseBeta > statusCall = apiService.buildStatus(workspaceId, buildId);
         
-        // Asynchronously execute HTTP request
-        statusCall.enqueue(statusResponseHandler);
+//         // Asynchronously execute HTTP request
+//         statusCall.enqueue(statusResponseHandler);
+        System.out.println("NOT IMPLEMENTED");
     }
     
     public void getAPK(String machineId, String apkPath, Callback < ResponseBody > apkDownloadHandler) {
@@ -150,6 +152,7 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
             CommandDetails commandDetails = iterator.next();
             String name = commandDetails.name;
             names.add(name);
+          AppData.addCommandMap(wid,name,commandDetails);
         }
         final String[] namesArr = names.toArray(new String[names.size()]);
 
@@ -162,7 +165,7 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody,Co
   }
   
   public void startWorkspace(String wid, Callback <ResponseBody> voidResponseHandler){
-    Call <ResponseBody> startWorkspaceCall = apiService.startWorkspace();
+    Call <ResponseBody> startWorkspaceCall = apiService.startWorkspace(wid);
     startWorkspaceCall.enqueue(voidResponseHandler);
   }
   

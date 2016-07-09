@@ -3,12 +3,15 @@ package in.pathri.codenvydownloadbeta.Client;
 import java.util.List;
 import java.util.Map;
 
+import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.BuildResult;
 import in.pathri.codenvydownloadbeta.pojo.BuildStatus;
 import in.pathri.codenvydownloadbeta.pojo.Channels;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseBeta;
+import in.pathri.codenvydownloadbeta.pojo.CommandDetails;
 import in.pathri.codenvydownloadbeta.pojo.LoginData;
+import in.pathri.codenvydownloadbeta.responsehandlers.ApkDownloadHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.BuildOutputHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.BuildStatusHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.VoidResponseHandler;
@@ -30,7 +33,7 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
 		betaClient.postLogin(loginData,loginResponseHandler);
     }
     
-    public void buildProj(String workspaceId, String project, String command, Callback < CodenvyResponseBeta > buildResponseHandler) {
+    public void buildProj(String workspaceId, String project, CommandDetails command, Callback < ResponseBody > buildResponseHandler) {
       	betaClient.getWorkspaceDetail(workspaceId, new WorkspaceStatusHandler(workspaceId, this));
 //			betaClient.buildProj(workspaceId,project,command,buildResponseHandler);
     }
@@ -51,6 +54,12 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
   
     public void startWorkspace(String workspaceId){
       betaWSClient = CodenvyBetaWSClient.getInstance(workspaceId,Channels.WORKSPACE_STATUS);
+      try {
+        Thread.sleep(5000);
+    } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
       betaWSClient.initChannel(workspaceId, new WorkspaceStatusHandler(workspaceId, this));
       betaClient.startWorkspace(workspaceId, new VoidResponseHandler());
     }
@@ -59,8 +68,8 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
         betaClient.buildStatus(workspaceId,buildId,statusResponseHandler);
     }
     
-    public void getAPK(String apkUrl, Callback < ResponseBody > apkDownloadHandler) {
-        betaClient.getAPK(apkUrl,apkDownloadHandler);
+    public void getAPK(String machineId, String apkUrl, Callback < ResponseBody > apkDownloadHandler) {
+        betaClient.getAPK(machineId, apkUrl,apkDownloadHandler);
     }
     
     public void getWorkspaceDetails(Callback < List<CodenvyResponseBeta> > workspaceResponseHandler){
@@ -91,10 +100,17 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
 	  synchronized public void checkCompletion() {
 		if(BuildStatus.COMPLETED.equals(AppData.getBuildStatus())){
 			if(BuildResult.SUCCESS.equals(AppData.getBuildResult())){
-				installApK();
+				CodenvyClient.getAPK();
 			}else if(BuildResult.FAILED.equals(AppData.getBuildResult())){
-				displayError(AppData.getBuildOutput());
+           HomePageActivity.updateStatusText(AppData.getBuildOutput());
 			}
 		}
 	}
+
+
+    public void buildProj(String workspaceId, String project,
+            Callback<CodenvyResponseBeta> buildResponseHandler) {
+        System.out.println("Not SUpported");
+        
+    }
 }

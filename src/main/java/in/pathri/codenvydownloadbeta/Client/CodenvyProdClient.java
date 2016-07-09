@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseProd;
+import in.pathri.codenvydownloadbeta.pojo.CommandDetails;
 import in.pathri.codenvydownloadbeta.pojo.LoginData;
 import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
 import okhttp3.JavaNetCookieJar;
@@ -87,13 +88,20 @@ public class CodenvyProdClient implements CodenvyClientInterface<ResponseBody,Co
         loginCall.enqueue(loginResponseHandler);
     }
     
-    public void buildProj(String workspaceId, String project, String command, Callback < CodenvyResponseProd > buildResponseHandler) {
+    public void buildProj(String workspaceId, String project, CommandDetails command, Callback < ResponseBody > buildResponseHandler) {
+		System.out.println("Not Supported");
+    }
+  
+  public void buildProj(String workspaceId, String project,
+          Callback<CodenvyResponseProd> buildResponseHandler) {
         // Prepare the HTTP request
         Call < CodenvyResponseProd > buildCall = apiService.buildProj(workspaceId, project);
         
         // Asynchronously execute HTTP request
         buildCall.enqueue(buildResponseHandler);
-    }
+
+  }
+
     
     public void buildStatus(String workspaceId, String buildId, Callback < CodenvyResponseProd > statusResponseHandler) {
         // Prepare the HTTP request

@@ -1,17 +1,19 @@
 package in.pathri.codenvydownloadbeta.pojo;
 
 import java.util.UUID;  
-
 import java.util.List;
 
 import com.google.common.base.Joiner;
+
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 
 public class AppData {
   private static LoginData loginData;
   private static String workspaceName;
   private static String workspaceId;
   private static String project;
-  private static CommandData command;
+  private static CommandDetails command;
   private static String buildTaskId;
   private static String apkUrl;
   private static String apkPath;  
@@ -20,6 +22,7 @@ public class AppData {
   private static BuildResult buildResult;
   private static BuildStatus buildStatus;
   private static List<String> buildOutput;
+  private static Table<String, String,CommandDetails> commandDetailsMap = HashBasedTable.create();
   
   public static LoginData getLoginData(){
     return loginData;
@@ -37,7 +40,7 @@ public class AppData {
     return project;
   }
 
-  public static CommandData getCommand(){
+  public static CommandDetails getCommand(){
     return command;
   }
 
@@ -95,8 +98,8 @@ public class AppData {
     AppData.project = project;
   }
 
-  public static void setCommand(CommandData command){
-    AppData.command = command;
+  public static void setCommand(String command){
+    AppData.command = commandDetailsMap.get(workspaceId,command);
   }
 
   public static void setBuildTaskId(String buildTaskId){
@@ -125,6 +128,10 @@ public class AppData {
   
   public static void addBuildOutput(String line){
 	  AppData.buildOutput.add(line);
+  }
+  
+  public static void addCommandMap(String wid, String commandName, CommandDetails command){
+    commandDetailsMap.put(wid,commandName, command);
   }
   
   //Generators

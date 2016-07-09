@@ -81,7 +81,7 @@ public class CodenvyClient {
   }
   public static void getAPK() {
     Log.d(TAG,"Inside get apk Init" + currentInstance.getCurrentURL());
-    currentInstance.getAPK(AppData.getApkUrl(), new ApkDownloadHandler());
+    currentInstance.getAPK(AppData.getMachineId(), AppData.getApkUrl(), new ApkDownloadHandler());
   }
   public static void getWorkspaceDetails(){
     Log.d(TAG,"Inside workspace details Init" + currentInstance.getCurrentURL());

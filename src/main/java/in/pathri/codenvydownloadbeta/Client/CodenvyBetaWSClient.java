@@ -1,4 +1,4 @@
-package in.pathri.codenvydownloadbeta.Client;
+	package in.pathri.codenvydownloadbeta.Client;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -6,6 +6,8 @@ import java.net.URISyntaxException;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_17;
 import org.java_websocket.handshake.ServerHandshake;
+import org.java_websocket.WebSocket.READYSTATE;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,13 +48,18 @@ public class CodenvyBetaWSClient extends WebSocketClient{
 		e.printStackTrace();
 	}
     }
-    
-    return clientChannelMap.get(wid, channel);
+    CodenvyBetaWSClient tempClient = clientChannelMap.get(wid, channel);
+    tempClient.connect();
+    return tempClient;
     
   }
   
   public void initChannel(String param, ApiResponseHandler <CodenvyResponseWS> responseHandler){
-    
+    System.out.println(this.getReadyState());
+    if(this.getReadyState() != READYSTATE.CONNECTING && this.getReadyState() != READYSTATE.OPEN){
+      this.connect();    
+      System.out.println("Called COnnect");
+    }
     this.responseHandler = responseHandler;
     
     JSONObject headersObj = new JSONObject();
@@ -74,7 +81,7 @@ public class CodenvyBetaWSClient extends WebSocketClient{
 	    String msg = msgObj.toString();
 	    
 	    System.out.println("Message: " + msg);
-	       
+	       System.out.println(this.getReadyState());
 	    this.send(msg); 	    
 	} catch (JSONException e) {
 		// TODO Auto-generated catch block
@@ -105,7 +112,7 @@ public class CodenvyBetaWSClient extends WebSocketClient{
       builder.registerTypeAdapter(Body.class, new wsBodyDeserializer());
       Gson gson = builder.create();
 
-      CodenvyResponse response = gson.fromJson(message, channel.getResponseClass());
+      CodenvyResponse response = (CodenvyResponse)gson.fromJson(message, channel.getResponseClass());
      if(response.getStatusCode().equals("0")){
        this.responseHandler.nextStep(response);
      }
