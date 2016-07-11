@@ -49,5 +49,10 @@ public class CodenvyResponseWS implements CodenvyResponse {
   public String getStatusCode(){
     return this.responseCode;
   }
+  
+  @Override
+	public String toString() {
+		return "{responseCode:" + this.responseCode + ",body:" + this.body.toString() + "}";
+	}
 
 }

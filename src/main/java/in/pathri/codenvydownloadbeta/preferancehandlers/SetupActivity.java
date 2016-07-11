@@ -34,6 +34,7 @@ import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.Servers;
 
 public class SetupActivity extends PreferenceActivity  {
+	private static final String className = SetupActivity.class.getSimpleName();
     public static final String SERVER_DOMAIN = "serverName";  
     public static final String USER_NAME = "username";
     public static final String PASSWORD = "password";

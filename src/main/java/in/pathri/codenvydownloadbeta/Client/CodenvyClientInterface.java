@@ -20,4 +20,5 @@ public interface CodenvyClientInterface<T,U> {
   public boolean isInitialised();
   public void setWorkspaceList(Map <String, U > workspaceList);
   public void getCommandDetails(String wid);
+  public void updateCookie(List<String> cookies);
 }

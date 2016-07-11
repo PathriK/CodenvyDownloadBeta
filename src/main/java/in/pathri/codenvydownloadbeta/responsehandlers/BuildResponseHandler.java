@@ -7,8 +7,10 @@ import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class BuildResponseHandler extends ApiResponseHandler<CodenvyResponse>{
+	private static final String className = BuildResponseHandler.class.getSimpleName();
     public BuildResponseHandler(){      
         super(HomePageActivity.triggerSpinner,CodenvyResponse.class);
     }
@@ -45,4 +47,10 @@ public class BuildResponseHandler extends ApiResponseHandler<CodenvyResponse>{
     void updateStatusText(String statusText) {
         HomePageActivity.updateTriggerStatusText(statusText);
     }
+
+	@Override
+	void handleCookie(Response<CodenvyResponse> response) {
+		// TODO Auto-generated method stub
+		
+	}
 }

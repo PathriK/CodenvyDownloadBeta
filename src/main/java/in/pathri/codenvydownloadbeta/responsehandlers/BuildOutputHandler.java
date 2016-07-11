@@ -2,6 +2,7 @@ package in.pathri.codenvydownloadbeta.responsehandlers;
 
 import java.util.List;
 
+import in.pathri.codenvydownloadbeta.CustomLogger;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.Client.CodenvyBetaClientAdapter;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
@@ -10,8 +11,10 @@ import in.pathri.codenvydownloadbeta.pojo.BuildResult;
 import in.pathri.codenvydownloadbeta.pojo.BuildStatus;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class BuildOutputHandler<Z extends CodenvyResponse> extends ApiResponseHandler<CodenvyResponse>{
+	private static final String className = BuildOutputHandler.class.getSimpleName();
 	CodenvyBetaClientAdapter clientImpl;
     public BuildOutputHandler( CodenvyBetaClientAdapter clientImpl){      
         super(HomePageActivity.triggerSpinner,CodenvyResponse.class);
@@ -22,6 +25,7 @@ public class BuildOutputHandler<Z extends CodenvyResponse> extends ApiResponseHa
     public void nextStep(CodenvyResponse codenvyResponse) {
     	final CodenvyResponse currentResponse = codenvyResponse;
     	String outputMsg = currentResponse.getMessage();
+    	CustomLogger.d(className, "nextStep", "outputMsg", outputMsg);
     	AppData.addBuildOutput(outputMsg);
     	checkMsgStatus(outputMsg);
     }
@@ -75,4 +79,10 @@ public class BuildOutputHandler<Z extends CodenvyResponse> extends ApiResponseHa
 	    	}
     	}
     }
+
+	@Override
+	void handleCookie(Response<CodenvyResponse> response) {
+		// TODO Auto-generated method stub
+		
+	}
 }

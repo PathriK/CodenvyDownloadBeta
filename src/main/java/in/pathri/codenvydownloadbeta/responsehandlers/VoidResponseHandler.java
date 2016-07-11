@@ -5,8 +5,10 @@ import java.util.List;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class VoidResponseHandler extends ApiResponseHandler<ResponseBody> {
+	private static final String className = VoidResponseHandler.class.getSimpleName();
 
     public VoidResponseHandler(){
         super(HomePageActivity.buildSpinner,ResponseBody.class);
@@ -39,5 +41,11 @@ public class VoidResponseHandler extends ApiResponseHandler<ResponseBody> {
 	@Override
 	public 	void nextStep(CodenvyResponse codenvyResponse) {
 		HomePageActivity.updateStatusText("Application Error!!");		
+	}
+
+	@Override
+	void handleCookie(Response<ResponseBody> response) {
+		// TODO Auto-generated method stub
+		
 	}
 }

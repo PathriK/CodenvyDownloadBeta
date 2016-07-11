@@ -3,11 +3,14 @@ package in.pathri.codenvydownloadbeta.responsehandlers;
 import java.util.List;
 
 import in.pathri.codenvydownloadbeta.CustomProgressDialog;
+import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class LoginRefreshHandler extends ApiResponseHandler<CodenvyResponse> {
+	private static final String className = LoginRefreshHandler.class.getSimpleName();
 	  
     public LoginRefreshHandler(CustomProgressDialog workspaceProgressDialog){
         super(workspaceProgressDialog,CodenvyResponse.class);
@@ -41,4 +44,10 @@ public class LoginRefreshHandler extends ApiResponseHandler<CodenvyResponse> {
     void nextStep(List<CodenvyResponse> codenvyResponses) {
 //         HomePageActivity.updateTriggerStatusText("Application Error!!");
     }
+
+	@Override
+	void handleCookie(Response<CodenvyResponse> response) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -9,8 +9,10 @@ import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import in.pathri.codenvydownloadbeta.pojo.ResourceLinks;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class StatusResponseHandler extends ApiResponseHandler<CodenvyResponse> {
+	private static final String className = StatusResponseHandler.class.getSimpleName();
     String wid;
     public StatusResponseHandler(){
         super(HomePageActivity.buildSpinner,CodenvyResponse.class);
@@ -70,4 +72,9 @@ public class StatusResponseHandler extends ApiResponseHandler<CodenvyResponse> {
     void nextStep(List<CodenvyResponse> codenvyResponses) {
         HomePageActivity.updateTriggerStatusText("Application Error!!");
     }
+	@Override
+	void handleCookie(Response<CodenvyResponse> response) {
+		// TODO Auto-generated method stub
+		
+	}
 }

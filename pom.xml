@@ -116,7 +116,9 @@
                       </outputApk>
                       <skip>false</skip>  
                   </zipalign>     
-                	<release>true</release>
+                <release>true</release>
+				<undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <device>192.168.0.104:5555</device>                
               </configuration>
            	  <executions>
                 <execution>

@@ -24,6 +24,7 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public class CodenvyProdClient implements CodenvyClientInterface<ResponseBody,CodenvyResponseProd> {
+	private static final String className = CodenvyProdClient.class.getSimpleName();
     public final String BASE_URL = "https://codenvy.com/api/";
     private Retrofit retrofit;
     private CodenvyApiService apiService;
@@ -89,7 +90,7 @@ public class CodenvyProdClient implements CodenvyClientInterface<ResponseBody,Co
     }
     
     public void buildProj(String workspaceId, String project, CommandDetails command, Callback < ResponseBody > buildResponseHandler) {
-		System.out.println("Not Supported");
+		System.out.println("Prod BuildProj::Not Supported");
     }
   
   public void buildProj(String workspaceId, String project,
@@ -142,5 +143,11 @@ public class CodenvyProdClient implements CodenvyClientInterface<ResponseBody,Co
   public void getCommandDetails(String wid){
     SetupActivity.addCommandMap(wid,new String[0]);
   }
+
+@Override
+public void updateCookie(List<String> cookies) {
+	// TODO Auto-generated method stub
+	
+}
 
   }

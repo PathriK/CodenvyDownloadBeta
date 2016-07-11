@@ -7,8 +7,10 @@ import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginResponseHandler extends ApiResponseHandler<CodenvyResponse> {
+	private static final String className = LoginResponseHandler.class.getSimpleName();
     String wid,project;
     
     public LoginResponseHandler(){
@@ -43,4 +45,10 @@ public class LoginResponseHandler extends ApiResponseHandler<CodenvyResponse> {
     void nextStep(List<CodenvyResponse> codenvyResponses) {
         HomePageActivity.updateTriggerStatusText("Application Error!!");
     }
+
+	@Override
+	void handleCookie(Response<CodenvyResponse> response) {
+		List<String> cookies = response.headers().values("Set-Cookie");
+		CodenvyClient.updateCookie(cookies);		
+	}
 }

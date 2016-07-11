@@ -2,11 +2,14 @@ package in.pathri.codenvydownloadbeta.responsehandlers;
 
 import java.util.List;
 
+import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import in.pathri.codenvydownloadbeta.preferancehandlers.LoginPreference;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class LoginDialogResponseHandler extends ApiResponseHandler<CodenvyResponse> {
+	private static final String className = LoginDialogResponseHandler.class.getSimpleName();
     public LoginDialogResponseHandler(){
         super(LoginPreference.loginSpinner,CodenvyResponse.class);
     }
@@ -40,4 +43,10 @@ public class LoginDialogResponseHandler extends ApiResponseHandler<CodenvyRespon
     void nextStep(List<CodenvyResponse> codenvyResponses) {
         LoginPreference.updateLoginStatus("Application Error!!");
     }
+
+	@Override
+	void handleCookie(Response<CodenvyResponse> response) {
+		// TODO Auto-generated method stub
+		
+	}
 }

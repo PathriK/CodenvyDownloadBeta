@@ -23,6 +23,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
 public class CodenvyClient {
+	private static final String className = CodenvyClient.class.getSimpleName();
   static CodenvyClientInterface currentInstance;
   static CodenvyClientInterface prodInstance;
   static CodenvyClientInterface betaInsatnce;
@@ -109,5 +110,8 @@ public class CodenvyClient {
   
   public static void installAPK(){
     HomePageActivity.installAPK(AppData.getApkPath());
+  }
+  public static void updateCookie(List<String> cookies) {
+	  currentInstance.updateCookie( cookies);
   }
 }

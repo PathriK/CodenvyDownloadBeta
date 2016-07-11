@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class ProjectResponseHandler extends ApiResponseHandler <List<CodenvyResponse>>{
+	private static final String className = ProjectResponseHandler.class.getSimpleName();
     private String wid;
     
     public ProjectResponseHandler(String wid){
@@ -53,4 +56,10 @@ public class ProjectResponseHandler extends ApiResponseHandler <List<CodenvyResp
     void updateStatusText(String statusText) {
         SetupActivity.updateProjectSummary(statusText);
     }
+
+	@Override
+	void handleCookie(Response<List<CodenvyResponse>> response) {
+		// TODO Auto-generated method stub
+		
+	}
 }

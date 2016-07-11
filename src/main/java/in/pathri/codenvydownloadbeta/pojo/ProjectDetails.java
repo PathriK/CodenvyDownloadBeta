@@ -3,4 +3,5 @@ package in.pathri.codenvydownloadbeta.pojo;
 
 public class ProjectDetails {
 	public String name;
+	public String path;
 }

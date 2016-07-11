@@ -12,13 +12,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.R;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.LoginData;
 
 public class LoginPreference extends DialogPreference {
-    
+	private static final String className = LoginPreference.class.getSimpleName();
     private Context mContext;
     private static TextView loginStatus;
     public static ProgressBar loginSpinner;

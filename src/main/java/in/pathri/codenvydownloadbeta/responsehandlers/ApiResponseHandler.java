@@ -1,10 +1,12 @@
 package in.pathri.codenvydownloadbeta.responsehandlers;
 
+import java.io.IOException;
 import java.util.List;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import in.pathri.codenvydownloadbeta.CustomLogger;
 import in.pathri.codenvydownloadbeta.CustomProgressDialog;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
@@ -14,7 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public abstract class ApiResponseHandler < T > implements Callback < T > {
-  	 final String TAG = "CodenvyBeta_APIResponseHndler";
+	private static final String className = ApiResponseHandler.class.getSimpleName();
     final static String START = "start";
     final static String END = "end";
   	 boolean retryFlag = false;
@@ -58,6 +60,8 @@ public abstract class ApiResponseHandler < T > implements Callback < T > {
   
     abstract void handleAuthIssue(ResponseBody responseBody);
     
+    abstract void handleCookie(Response <T> response);
+    
     @Override
     public void onFailure(Call < T > arg0, Throwable t) {
         this.updateStatusText("Connection Error" + HomePageActivity.getStackTraceString(t));
@@ -66,9 +70,16 @@ public abstract class ApiResponseHandler < T > implements Callback < T > {
     
     @Override
     public void onResponse(Call < T > request, Response < T > response) {
-      Log.d(TAG,"Request URL:" + request.request().url());
+      CustomLogger.d(className, "onResponse", "Request URL:", request.request().url().toString());
         if (response.isSuccessful()) {
             if (200 == response.code()) {
+            	this.handleCookie(response);
+//            	try {
+//					CustomLogger.d(className, "onResponse", "Raw Response", response.raw().body().string());
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
                 switch (responseType){
                     case POJO:
                       CodenvyResponse apiResponse = (CodenvyResponse) response.body();
@@ -129,7 +140,8 @@ public abstract class ApiResponseHandler < T > implements Callback < T > {
     private void updateProgress(String status){
         if(START.equalsIgnoreCase(status)){
             if(spinner != null){
-                this.spinner.setVisibility(View.VISIBLE);
+//                this.spinner.setVisibility(View.VISIBLE);
+                CustomLogger.i(className, "updateProgress", "Visible");
             }
             if(pd != null){
                 pd.show();

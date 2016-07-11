@@ -3,6 +3,7 @@ package in.pathri.codenvydownloadbeta.Client;
 import java.util.List;
 import java.util.Map;
 
+import in.pathri.codenvydownloadbeta.CustomLogger;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.BuildResult;
@@ -20,26 +21,34 @@ import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
 public class CodenvyBetaClientAdapter implements CodenvyClientInterface<ResponseBody,CodenvyResponseBeta> {
+	private static final String className = CodenvyBetaClientAdapter.class.getSimpleName();
   CodenvyBetaClient betaClient;
   CodenvyBetaWSClient betaWSClient;
-  public CodenvyBetaClientAdapter(){
+  
+  
+  	public CodenvyBetaClientAdapter(){
+  		CustomLogger.i(className, "CodenvyBetaClientAdapter", "Inside Constructor");
         this.betaClient = new CodenvyBetaClient();
       }
+  
     public void apiInit() {
+    	CustomLogger.i(className, "apiInit", "Inside Method");
  		betaClient.apiInit();
     }
     
     public void postLogin(LoginData loginData, Callback < CodenvyResponseBeta > loginResponseHandler) {
+    	CustomLogger.d(className, "postLogin", "LoginData", loginData.toString());
 		betaClient.postLogin(loginData,loginResponseHandler);
     }
     
     public void buildProj(String workspaceId, String project, CommandDetails command, Callback < ResponseBody > buildResponseHandler) {
+    	CustomLogger.d(className, "buildProj", "workspaceId|project|command", workspaceId + "|" + project + "|" + command.toString());
       	betaClient.getWorkspaceDetail(workspaceId, new WorkspaceStatusHandler(workspaceId, this));
 //			betaClient.buildProj(workspaceId,project,command,buildResponseHandler);
     }
     
     public void triggerBuild(){
-    	betaWSClient.closeChannel();
+    	CustomLogger.i(className, "triggerBuild", "Inside Trigger Build");
     	CodenvyBetaWSClient processOutputWS = CodenvyBetaWSClient.getInstance(AppData.getWorkspaceId(),Channels.PROCESS_OUTPUT);
     	CodenvyBetaWSClient processStatusWS = CodenvyBetaWSClient.getInstance(AppData.getWorkspaceId(),Channels.PROCESS_STATUS);
 
@@ -48,41 +57,46 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
     	processOutputWS.initChannel(AppData.getGUID(), new BuildOutputHandler(this));
     	processStatusWS.initChannel(AppData.getMachineId(), new BuildStatusHandler(this));
     	
-    	betaClient.buildProj(AppData.getMachineId(),"",AppData.getCommand(), new VoidResponseHandler());
+    	betaClient.buildProj(AppData.getMachineId(),AppData.getGUID(),AppData.getCommand(), new VoidResponseHandler());
     	
     }
   
     public void startWorkspace(String workspaceId){
+    	CustomLogger.i(className, "startWorkspace", "Inside startWorkspace");
       betaWSClient = CodenvyBetaWSClient.getInstance(workspaceId,Channels.WORKSPACE_STATUS);
-      try {
-        Thread.sleep(5000);
-    } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
+//      try {
+//        Thread.sleep(5000);
+//    } catch (InterruptedException e) {
+//        // TODO Auto-generated catch block
+//        e.printStackTrace();
+//    }
       betaWSClient.initChannel(workspaceId, new WorkspaceStatusHandler(workspaceId, this));
       betaClient.startWorkspace(workspaceId, new VoidResponseHandler());
     }
     
     public void buildStatus(String workspaceId, String buildId, Callback < CodenvyResponseBeta > statusResponseHandler) {
+    	CustomLogger.d(className, "buildStatus", "workspaceId|buildId", workspaceId + "|" + buildId);
         betaClient.buildStatus(workspaceId,buildId,statusResponseHandler);
     }
     
     public void getAPK(String machineId, String apkUrl, Callback < ResponseBody > apkDownloadHandler) {
+    	CustomLogger.d(className, "getAPK", "machineId|apkPath", machineId + "|" + apkUrl);
         betaClient.getAPK(machineId, apkUrl,apkDownloadHandler);
     }
     
     public void getWorkspaceDetails(Callback < List<CodenvyResponseBeta> > workspaceResponseHandler){
+    	CustomLogger.i(className, "getWorkspaceDetails", "Into Function");
       betaClient.getWorkspaceDetails(workspaceResponseHandler);
     }
     
     public void getProjectDetails(String wid,Callback < List<CodenvyResponseBeta> > projectResponseHandler){
-
+    	CustomLogger.d(className, "getProjectDetails", "wid", wid);
 		betaClient.getProjectDetails(wid,projectResponseHandler);
       
     }
   
 	  public void getCommandDetails(String wid){
+		  CustomLogger.d(className, "getCommandDetails", "wid", wid);
 		  betaClient.getCommandDetails(wid);
 	  }
 	  	public String getCurrentURL(){
@@ -94,10 +108,13 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
 	  }
 	  
 	  public void setWorkspaceList(Map < String, CodenvyResponseBeta > workspaceList){
+		  CustomLogger.i(className, "setWorkspaceList", "setWorkspaceList called");
 	    betaClient.setWorkspaceList(workspaceList);
 	  }
   
 	  synchronized public void checkCompletion() {
+		  CustomLogger.d(className, "checkCompletion", "BuildStatus", AppData.getBuildStatus().name());
+		  CustomLogger.d(className, "checkCompletion", "BuildResult", AppData.getBuildResult().name());
 		if(BuildStatus.COMPLETED.equals(AppData.getBuildStatus())){
 			if(BuildResult.SUCCESS.equals(AppData.getBuildResult())){
 				CodenvyClient.getAPK();
@@ -110,7 +127,12 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
 
     public void buildProj(String workspaceId, String project,
             Callback<CodenvyResponseBeta> buildResponseHandler) {
-        System.out.println("Not SUpported");
+    	CustomLogger.i(className, "buildProj", "Non Command Function::Not Supported");
         
     }
+	@Override
+	public void updateCookie(List<String> cookies) {
+		CustomLogger.i(className, "updateCookie", "Update Cookie Called");
+		betaClient.updateCookie(cookies);
+	}
 }

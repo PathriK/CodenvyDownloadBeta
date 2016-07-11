@@ -16,4 +16,9 @@ public class LoginData {
     public String getPassword() {
         return this.password;
     }
+    
+    @Override
+    public String toString(){
+    	return "Username=" + username + "::" + "password" + password;
+    }
 }

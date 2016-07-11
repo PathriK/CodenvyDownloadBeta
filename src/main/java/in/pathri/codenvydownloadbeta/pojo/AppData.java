@@ -8,7 +8,12 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
+import in.pathri.codenvydownloadbeta.CustomLogger;
+import in.pathri.codenvydownloadbeta.HomePageActivity;
+
 public class AppData {
+	private static final String className = AppData.class.getSimpleName();
+	
   private static LoginData loginData;
   private static String workspaceName;
   private static String workspaceId;
@@ -24,6 +29,9 @@ public class AppData {
   private static List<String> buildOutput;
   private static Table<String, String,CommandDetails> commandDetailsMap = HashBasedTable.create();
   
+  {
+	  clearAll();
+  }
   public static LoginData getLoginData(){
     return loginData;
   }
@@ -41,7 +49,11 @@ public class AppData {
   }
 
   public static CommandDetails getCommand(){
-    return command;
+	  if(command != null){
+		  return command.getInstance(project);
+	  }else{
+		  return new CommandDetails("","","");
+	  }    
   }
 
   public static String getBuildTaskId(){
@@ -100,6 +112,7 @@ public class AppData {
 
   public static void setCommand(String command){
     AppData.command = commandDetailsMap.get(workspaceId,command);
+    CustomLogger.d(className, "setCommand", "command|commandDetail", command + "|" + AppData.command);
   }
 
   public static void setBuildTaskId(String buildTaskId){
@@ -142,11 +155,13 @@ public class AppData {
   
   public static void clearAll(){
 	  workspaceName=workspaceId=project=buildTaskId=apkUrl=apkPath=machineId=guidString="";
-	  buildOutput.clear();
+	  if(buildOutput != null){
+		  buildOutput.clear();
+	  }
 	  buildResult = BuildResult.NOT_SET;
 	  buildStatus = BuildStatus.NOT_STARTED;
-	  loginData = null;
-	  command = null;
+	  loginData = new LoginData("", "");
+	  command = new CommandDetails("", "", "");
   }
 
 

@@ -25,11 +25,13 @@ import in.pathri.codenvydownloadbeta.pojo.Servers;
 import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
 
 public class HomePageActivity extends Activity {
+	private static final String className = HomePageActivity.class.getSimpleName();
     public static final Integer SUCCESS_CODE = 200;
     static TextView loginStatus, buildStatus, statusMsg, downloadStatus, triggerStatus,currentProject;
     public static ProgressBar loginSpinner,buildSpinner,triggerSpinner,downloadSpinner;
     public static Handler statusHandler;
     public static Context context;
+    
 //     private static String username,password,wid,project,wname,command;
     
     @Override
@@ -79,8 +81,8 @@ public class HomePageActivity extends Activity {
         updateDownloadStatusText("");
     }
     
-    public static void updateLoginStatusText(String text) {
-        loginStatus.setText(text);
+    public static void updateLoginStatusText(String text) {       
+    	loginStatus.setText(text);
     }
     
     public static void updateTriggerStatusText(String text) {
@@ -88,7 +90,8 @@ public class HomePageActivity extends Activity {
     }
     
     public static void updateBuildStatusText(String text) {
-        buildStatus.setText(text);
+//        buildStatus.setText(text);
+    	CustomLogger.d(className, "updateBuildStatusText", "text", text);    	
     }
     
     public static void updateDownloadStatusText(String text) {
@@ -102,7 +105,7 @@ public class HomePageActivity extends Activity {
     
     
     public void onBuild(View view) {
-        clearStatusTexts();
+        clearStatusTexts();        
         loginStatus.setText("Logging In");
         doLogin();
     }
@@ -157,6 +160,14 @@ public class HomePageActivity extends Activity {
         String project = myPrefs.getString(SetupActivity.PROJECT, "");
       String command = myPrefs.getString(SetupActivity.COMMAND, ""); 
       String server = myPrefs.getString(SetupActivity.SERVER_DOMAIN, ""); 
+
+      AppData.setLoginData(new LoginData(username,password));
+      AppData.setWorkspaceName(wname);
+      AppData.setWorkspaceId(wid);
+      AppData.setProject(project);
+      AppData.setCommand(command);
+
+      
       if(server != "" && Servers.valueOf(server) == Servers.BETA){
         server = "Beta";
       }else{
@@ -166,11 +177,6 @@ public class HomePageActivity extends Activity {
         command = " ; Command: " + command;
       }
       
-      AppData.setLoginData(new LoginData(username,password));
-      AppData.setWorkspaceName(wname);
-      AppData.setWorkspaceId(wid);
-      AppData.setProject(project);
-      AppData.setCommand(command);
         
         
         String statusMsg = "Error!";

@@ -1,4 +1,4 @@
-	package in.pathri.codenvydownloadbeta.Client;
+package in.pathri.codenvydownloadbeta.Client;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.google.gson.Gson;
@@ -19,6 +20,7 @@ import com.neovisionaries.ws.client.WebSocketExtension;
 import com.neovisionaries.ws.client.WebSocketFactory;
 import com.neovisionaries.ws.client.WebSocketFrame;
 
+import in.pathri.codenvydownloadbeta.CustomLogger;
 import in.pathri.codenvydownloadbeta.pojo.Body;
 import in.pathri.codenvydownloadbeta.pojo.Channels;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
@@ -27,6 +29,8 @@ import in.pathri.codenvydownloadbeta.pojo.wsBodyDeserializer;
 import in.pathri.codenvydownloadbeta.responsehandlers.ApiResponseHandler;
 
 public class CodenvyBetaWSClient extends WebSocketAdapter{
+	
+	private static final String className = CodenvyBetaWSClient.class.getSimpleName();
 	private WebSocket ws;
 	
   private static String BASE_URL = "ws://beta.codenvy.com/api/ws";
@@ -39,17 +43,24 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
   
   private static Table<String, Channels,CodenvyBetaWSClient> clientChannelMap = HashBasedTable.create();
   
+  private static String cookieString = "";
+  
   public CodenvyBetaWSClient(String wid, Channels channel) throws IOException{
+	  CustomLogger.i(className, "CodenvyBetaWSClient", "Inside Constructor");
+	  System.out.println("WS Creation::Cookie::"+ cookieString);
 	  this.ws = new WebSocketFactory()
       .setConnectionTimeout(TIMEOUT)
       .createSocket(BASE_URL + "/" + wid)
       .addListener(this)
-      .addExtension(WebSocketExtension.PERMESSAGE_DEFLATE);	 
+      .addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
+      .addHeader("Cookie", cookieString);	 
     this.channel = channel;    
   }
   
   public static CodenvyBetaWSClient getInstance(String wid, Channels channel){
+	  CustomLogger.d(className, "getInstance", "wid|channel", wid + "|" + channel);
     if(!clientChannelMap.contains(wid,channel)){
+    	CustomLogger.i(className, "CodenvyBetaWSClient", "Creating new instance for " + channel.name());
       try {
 		clientChannelMap.put(wid,channel,new CodenvyBetaWSClient(wid,channel));
 	} catch (IOException e) {
@@ -64,19 +75,14 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
   }
   
   private void connect(){
-	  try {
-		if(!ws.isOpen()){
-			ws.connect();
-		}
-	} catch (WebSocketException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	  CustomLogger.i(className, "connect", "Into Connect");
+	  if(!ws.isOpen()){
+		ws.connectAsynchronously();
 	}
   }
   
   public void initChannel(String param, ApiResponseHandler <CodenvyResponseWS> responseHandler){
-    System.out.println("INIT Channel" + ws.isOpen());
-
+	  CustomLogger.d(className, "initChannel", "param|responseHandler", param + "|" + responseHandler.getClass().getName());
     this.responseHandler = responseHandler;
     
     JSONObject headersObj = new JSONObject();
@@ -107,30 +113,36 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
   }
   
   public void closeChannel(){
+	  CustomLogger.i(className, "closeChannel", "Into closeChannel");
+	  if(ws.isOpen()){
 	  ws.disconnect();
+	  }
   }
   
   public void closeAllChannel(){
 	  
   }
   
-  
+	public static void updateCookie(List<String> cookies) {
+	    cookieString = Joiner.on(";").join(cookies); 
+	}
+	
     @Override
     public void onConnected(WebSocket websocket, Map<String, List<String>> headers) throws Exception
     {
-    	System.out.println( "opened connection" );
+    	CustomLogger.i(className, "onConnected", "Into onConnected");
     }
 
     @Override
     public void onDisconnected(WebSocket websocket,WebSocketFrame serverCloseFrame, WebSocketFrame clientCloseFrame,boolean closedByServer) throws Exception
     {
-    	System.out.println( "Connection closed by " + ( closedByServer ? "remote peer" : "us" ) + "serverCloseFrame:" + serverCloseFrame + "::clientCloseFrame" + clientCloseFrame );
+    	CustomLogger.d(className, "onDisconnected", "closedByServer|serverCloseFrame|clientCloseFrame", closedByServer + "|" + serverCloseFrame + "|" + clientCloseFrame);
     }
 
     @Override
     public void onTextMessage(WebSocket websocket, String text) throws Exception
     {
-		System.out.println( "received: " + text );
+		CustomLogger.d(className, "onTextMessage", "text|responseHandler", text + "|" + responseHandler.getClass().getSimpleName());
 	     
 		GsonBuilder builder = new GsonBuilder();
       builder.registerTypeAdapter(Body.class, new wsBodyDeserializer());
@@ -146,12 +158,13 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
     @Override
     public void onBinaryMessage(WebSocket websocket, byte[] binary) throws Exception
     {
+    	CustomLogger.d(className, "onBinaryMessage", "binary", binary.toString());
     	System.out.println("onBinaryMessage");
     }
     
     ///Error Methods
     private void errorLogger(String errorName, Throwable cause){
-  	  System.out.println("WSCLIENT::Error Occured-" + errorName + "::" + cause.getMessage());
+  	  CustomLogger.d(className, "errorLogger", errorName, cause.getMessage());
   	  cause.printStackTrace();
     }
 
@@ -215,5 +228,7 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
     {
     	errorLogger("handleCallbackError", cause);
     }
+
+
 
 }

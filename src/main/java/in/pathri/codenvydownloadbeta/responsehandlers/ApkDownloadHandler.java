@@ -12,9 +12,11 @@ import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class ApkDownloadHandler extends ApiResponseHandler<ResponseBody>{
-        
+	private static final String className = ApkDownloadHandler.class.getSimpleName();
+	
     public ApkDownloadHandler() {
         super(HomePageActivity.downloadSpinner,ResponseBody.class);
     }
@@ -59,4 +61,10 @@ public class ApkDownloadHandler extends ApiResponseHandler<ResponseBody>{
     void updateStatusText(String statusText) {
         HomePageActivity.updateDownloadStatusText(statusText);
     }
+
+	@Override
+	void handleCookie(Response<ResponseBody> response) {
+		// TODO Auto-generated method stub
+		
+	}
 }
