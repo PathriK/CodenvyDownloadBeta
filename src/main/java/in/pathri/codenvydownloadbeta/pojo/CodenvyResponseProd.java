@@ -50,9 +50,14 @@ public class CodenvyResponseProd implements CodenvyResponse {
   }
 
 @Override
-public String getStatusCode() {
+public int getStatusCode() {
 	// TODO Auto-generated method stub
-	return null;
+	return 0;
+}
+
+@Override
+public String getMachineId() {
+return "";
 }
 
 }

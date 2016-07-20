@@ -8,4 +8,8 @@ public class RuntimeDetails {
   public List<MachineDetails> getMachies(){
     return machines;
   }
+
+public MachineDetails getMachine(int i) {
+	return machines.get(i);
+}
 }

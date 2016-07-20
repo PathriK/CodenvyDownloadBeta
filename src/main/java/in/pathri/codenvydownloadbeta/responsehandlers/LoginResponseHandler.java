@@ -38,17 +38,23 @@ public class LoginResponseHandler extends ApiResponseHandler<CodenvyResponse> {
     
     @Override
     void nextStep(ResponseBody arg0) {
-        HomePageActivity.updateLoginStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "ResponseBody" + "::" + "Application Error!!");
     }
     
     @Override
     void nextStep(List<CodenvyResponse> codenvyResponses) {
-        HomePageActivity.updateTriggerStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse List" + "::" + "Application Error!!");
     }
 
 	@Override
 	void handleCookie(Response<CodenvyResponse> response) {
 		List<String> cookies = response.headers().values("Set-Cookie");
 		CodenvyClient.updateCookie(cookies);		
+	}
+
+	@Override
+	public void onConnect() {
+		// TODO Auto-generated method stub
+		
 	}
 }

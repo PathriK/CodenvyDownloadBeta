@@ -36,16 +36,22 @@ public class LoginDialogResponseHandler extends ApiResponseHandler<CodenvyRespon
     
     @Override
     void nextStep(ResponseBody arg0) {
-        LoginPreference.updateLoginStatus("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "ResponseBody" + "::" + "Application Error!!");
     }
     
     @Override
     void nextStep(List<CodenvyResponse> codenvyResponses) {
-        LoginPreference.updateLoginStatus("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse List" + "::" + "Application Error!!");
     }
 
 	@Override
 	void handleCookie(Response<CodenvyResponse> response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnect() {
 		// TODO Auto-generated method stub
 		
 	}

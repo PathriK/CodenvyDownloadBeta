@@ -118,7 +118,7 @@
                   </zipalign>     
                 <release>true</release>
 				<undeployBeforeDeploy>true</undeployBeforeDeploy>
-                    <device>192.168.0.104:5555</device>                
+                    <device>192.168.0.102:5555</device>                
               </configuration>
            	  <executions>
                 <execution>

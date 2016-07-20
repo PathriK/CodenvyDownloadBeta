@@ -62,6 +62,8 @@ public abstract class ApiResponseHandler < T > implements Callback < T > {
     
     abstract void handleCookie(Response <T> response);
     
+    public abstract void onConnect();
+    
     @Override
     public void onFailure(Call < T > arg0, Throwable t) {
         this.updateStatusText("Connection Error" + HomePageActivity.getStackTraceString(t));

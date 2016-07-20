@@ -28,25 +28,24 @@ import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseWS;
 import in.pathri.codenvydownloadbeta.pojo.wsBodyDeserializer;
 import in.pathri.codenvydownloadbeta.responsehandlers.ApiResponseHandler;
 
-public class CodenvyBetaWSClient extends WebSocketAdapter{
+public class CodenvyBetaWSClient_nv extends WebSocketAdapter{
 	
-	private static final String className = CodenvyBetaWSClient.class.getSimpleName();
+	private static final String className = CodenvyBetaWSClient_nv.class.getSimpleName();
 	private WebSocket ws;
 	
-  private static String BASE_URL = "wss://beta.codenvy.com/api/ws";
+  private static String BASE_URL = "ws://beta.codenvy.com/api/ws";
   private static String CHANNEL_HEADER_NAME = "x-everrest-websocket-message-type";
   private static String CHANNEL_HEADER_VALUE = "subscribe-channel";
   private static final int TIMEOUT = 5000;
   
   private Channels channel;
   private ApiResponseHandler <CodenvyResponseWS> responseHandler;
-  private String channelMsg = "";
   
-  private static Table<String, Channels,CodenvyBetaWSClient> clientChannelMap = HashBasedTable.create();
+  private static Table<String, Channels,CodenvyBetaWSClient_nv> clientChannelMap = HashBasedTable.create();
   
   private static String cookieString = "";
   
-  public CodenvyBetaWSClient(String wid, Channels channel) throws IOException{
+  public CodenvyBetaWSClient_nv(String wid, Channels channel) throws IOException{
 	  CustomLogger.i(className, "CodenvyBetaWSClient", "Inside Constructor");
 	  System.out.println("WS Creation::Cookie::"+ cookieString);
 	  this.ws = new WebSocketFactory()
@@ -58,20 +57,21 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
     this.channel = channel;    
   }
   
-  public static CodenvyBetaWSClient getInstance(String wid, Channels channel){
+  public static CodenvyBetaWSClient_nv getInstance(String wid, Channels channel){
 	  CustomLogger.d(className, "getInstance", "wid|channel", wid + "|" + channel);
     if(!clientChannelMap.contains(wid,channel)){
     	CustomLogger.i(className, "CodenvyBetaWSClient", "Creating new instance for " + channel.name());
       try {
-		clientChannelMap.put(wid,channel,new CodenvyBetaWSClient(wid,channel));
+		clientChannelMap.put(wid,channel,new CodenvyBetaWSClient_nv(wid,channel));
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
     }
-    CodenvyBetaWSClient tempClient = clientChannelMap.get(wid, channel);
+    CodenvyBetaWSClient_nv tempClient = clientChannelMap.get(wid, channel);
     tempClient.connect();
-    return tempClient;    
+    return tempClient;
+    
   }
   
   private void connect(){
@@ -100,10 +100,11 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
 	    msgObj.putOpt("method","POST");
 	    msgObj.putOpt("headers",headersArr);
 	    msgObj.putOpt("body",bodyObj.toString());
-	    	    
-//	    ws.sendText(msg); 	   
-	    this.channelMsg = msgObj.toString();
-	    System.out.println("Message: " + channelMsg);
+	    
+	    String msg = msgObj.toString();
+	    
+	    System.out.println("Message: " + msg);
+	    ws.sendText(msg); 	    
 	} catch (JSONException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -111,14 +112,10 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
 
   }
   
-  private void connectChannel(){
-	  ws.sendText(channelMsg);
-  }
-  
   public void closeChannel(){
 	  CustomLogger.i(className, "closeChannel", "Into closeChannel");
 	  if(ws.isOpen()){
-		  ws.disconnect();
+	  ws.disconnect();
 	  }
   }
   
@@ -134,7 +131,6 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
     public void onConnected(WebSocket websocket, Map<String, List<String>> headers) throws Exception
     {
     	CustomLogger.i(className, "onConnected", "Into onConnected");
-    	connectChannel();
     }
 
     @Override
@@ -153,11 +149,8 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
       Gson gson = builder.create();
 
       CodenvyResponse response = (CodenvyResponse)gson.fromJson(text, channel.getResponseClass());
-      CustomLogger.d(className, "onTextMessage", "statusCode", "" + response.getStatusCode());
-     if(response.getStatusCode() == 0){
+     if(response.getStatusCode().equals("0")){
        this.responseHandler.nextStep(response);
-     }else if(response.getStatusCode() == 200){
-    	 this.responseHandler.onConnect();
      }
     	
     }

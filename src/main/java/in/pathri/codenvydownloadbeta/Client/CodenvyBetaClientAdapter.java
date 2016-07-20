@@ -22,8 +22,9 @@ import retrofit2.Callback;
 
 public class CodenvyBetaClientAdapter implements CodenvyClientInterface<ResponseBody,CodenvyResponseBeta> {
 	private static final String className = CodenvyBetaClientAdapter.class.getSimpleName();
+	public boolean isBuildStatusHandlerReady = false;
+	public boolean isBuildOutputHandlerReady = false;
   CodenvyBetaClient betaClient;
-  CodenvyBetaWSClient betaWSClient;
   
   
   	public CodenvyBetaClientAdapter(){
@@ -47,32 +48,30 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
 //			betaClient.buildProj(workspaceId,project,command,buildResponseHandler);
     }
     
-    public void triggerBuild(){
+    public void readyBuildHandler(){
     	CustomLogger.i(className, "triggerBuild", "Inside Trigger Build");
-    	CodenvyBetaWSClient processOutputWS = CodenvyBetaWSClient.getInstance(AppData.getWorkspaceId(),Channels.PROCESS_OUTPUT);
-    	CodenvyBetaWSClient processStatusWS = CodenvyBetaWSClient.getInstance(AppData.getWorkspaceId(),Channels.PROCESS_STATUS);
-
     	AppData.generateGUID();
-    	
-    	processOutputWS.initChannel(AppData.getGUID(), new BuildOutputHandler(this));
-    	processStatusWS.initChannel(AppData.getMachineId(), new BuildStatusHandler(this));
-    	
-    	betaClient.buildProj(AppData.getMachineId(),AppData.getGUID(),AppData.getCommand(), new VoidResponseHandler());
-    	
+    	isBuildOutputHandlerReady = isBuildStatusHandlerReady = false;
+    	CodenvyBetaWSClient.getInstance(AppData.getWorkspaceId(),Channels.PROCESS_OUTPUT).initChannel(AppData.getGUID(), new BuildOutputHandler(this));
+    	CodenvyBetaWSClient.getInstance(AppData.getWorkspaceId(),Channels.PROCESS_STATUS).initChannel(AppData.getMachineId(), new BuildStatusHandler(this));    	    
+    }
+    
+    public synchronized void  triggerBuild(){
+    	CustomLogger.d(className, "triggerBuild", "isBuildStatusHandlerReady|isBuildOutputHandlerReady", isBuildStatusHandlerReady + "|" + isBuildOutputHandlerReady);
+    	if(isBuildStatusHandlerReady && isBuildOutputHandlerReady){
+    		betaClient.buildProj(AppData.getMachineId(),AppData.getGUID(),AppData.getCommand(), new VoidResponseHandler());
+    	}
     }
   
-    public void startWorkspace(String workspaceId){
+    public void readyWorkspaceStatusHandler(String workspaceId){
     	CustomLogger.i(className, "startWorkspace", "Inside startWorkspace");
-      betaWSClient = CodenvyBetaWSClient.getInstance(workspaceId,Channels.WORKSPACE_STATUS);
-//      try {
-//        Thread.sleep(5000);
-//    } catch (InterruptedException e) {
-//        // TODO Auto-generated catch block
-//        e.printStackTrace();
-//    }
-      betaWSClient.initChannel(workspaceId, new WorkspaceStatusHandler(workspaceId, this));
-      betaClient.startWorkspace(workspaceId, new VoidResponseHandler());
+      CodenvyBetaWSClient.getInstance(workspaceId,Channels.WORKSPACE_STATUS).initChannel(workspaceId, new WorkspaceStatusHandler(workspaceId, this));      
     }
+    
+    public void startWorkspace(){
+    	betaClient.startWorkspace(AppData.getWorkspaceId(), new VoidResponseHandler());	
+    }
+    
     
     public void buildStatus(String workspaceId, String buildId, Callback < CodenvyResponseBeta > statusResponseHandler) {
     	CustomLogger.d(className, "buildStatus", "workspaceId|buildId", workspaceId + "|" + buildId);

@@ -16,7 +16,7 @@ public class VoidResponseHandler extends ApiResponseHandler<ResponseBody> {
     
     @Override
     void nextStep(ResponseBody arg0) {
-        HomePageActivity.updateStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "ResponseBody" + "::" + "Application Error!!");
     }
   
     @Override
@@ -35,16 +35,22 @@ public class VoidResponseHandler extends ApiResponseHandler<ResponseBody> {
     
     @Override
     void nextStep(List<CodenvyResponse> codenvyResponses) {
-        HomePageActivity.updateTriggerStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse List" + "::" + "Application Error!!");
     }
 
 	@Override
 	public 	void nextStep(CodenvyResponse codenvyResponse) {
-		HomePageActivity.updateStatusText("Application Error!!");		
+		HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse" + "::" + "Application Error!!");		
 	}
 
 	@Override
 	void handleCookie(Response<ResponseBody> response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnect() {
 		// TODO Auto-generated method stub
 		
 	}

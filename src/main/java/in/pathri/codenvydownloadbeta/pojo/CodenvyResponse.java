@@ -7,6 +7,8 @@ public interface CodenvyResponse {
   
   public String getId();
   
+  public String getMachineId();
+  
   public String getMessage();
   
   public String getValue();
@@ -21,6 +23,6 @@ public interface CodenvyResponse {
 
   public String getName();
   
-  public String getStatusCode();
+  public int getStatusCode();
 
 }

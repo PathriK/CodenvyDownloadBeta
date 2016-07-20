@@ -86,6 +86,7 @@ public class HomePageActivity extends Activity {
     }
     
     public static void updateTriggerStatusText(String text) {
+    	CustomLogger.i(className, "updateTriggerStatusText", text);    	
         triggerStatus.setText(text);
     }
     
@@ -161,6 +162,7 @@ public class HomePageActivity extends Activity {
       String command = myPrefs.getString(SetupActivity.COMMAND, ""); 
       String server = myPrefs.getString(SetupActivity.SERVER_DOMAIN, ""); 
 
+      AppData.clearAll();
       AppData.setLoginData(new LoginData(username,password));
       AppData.setWorkspaceName(wname);
       AppData.setWorkspaceId(wid);

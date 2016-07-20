@@ -50,7 +50,7 @@ public class WorkspaceResponseHandler extends ApiResponseHandler <List<CodenvyRe
     
     @Override
     void nextStep(ResponseBody arg0) {
-        updateStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "ResponseBody" + "::" + "Application Error!!");
     }
 
     @Override
@@ -67,7 +67,7 @@ public class WorkspaceResponseHandler extends ApiResponseHandler <List<CodenvyRe
 
     @Override
     public void nextStep(CodenvyResponse arg0) {
-        updateStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse" + "::" + "Application Error!!");
     }
     
     @Override
@@ -77,6 +77,12 @@ public class WorkspaceResponseHandler extends ApiResponseHandler <List<CodenvyRe
 
 	@Override
 	void handleCookie(Response<List<CodenvyResponse>> response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnect() {
 		// TODO Auto-generated method stub
 		
 	}

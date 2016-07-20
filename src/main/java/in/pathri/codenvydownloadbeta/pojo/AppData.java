@@ -30,7 +30,7 @@ public class AppData {
   private static Table<String, String,CommandDetails> commandDetailsMap = HashBasedTable.create();
   
   {
-	  clearAll();
+	  AppData.clearAll();
   }
   public static LoginData getLoginData(){
     return loginData;
@@ -77,10 +77,12 @@ public class AppData {
   }
   
   public static String getGUID(){
-	  return guidString;
+//	  return guidString;
+	  return "491d48b8-b1ae-4f8b-b5b8-348c7fdec50e".toUpperCase();
   }
   
   public static BuildResult getBuildResult() {
+	  CustomLogger.d(className, "getBuildResult", "buildResult", buildResult.toString());
 	  return buildResult;	
   }
   
@@ -154,6 +156,7 @@ public class AppData {
   }
   
   public static void clearAll(){
+	  CustomLogger.i(className, "ClearAll", "Into Function");
 	  workspaceName=workspaceId=project=buildTaskId=apkUrl=apkPath=machineId=guidString="";
 	  if(buildOutput != null){
 		  buildOutput.clear();

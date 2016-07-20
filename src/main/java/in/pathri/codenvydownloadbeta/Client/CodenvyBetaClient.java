@@ -31,7 +31,7 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, C
 
 	private static final String className = CodenvyBetaClient.class.getSimpleName();
 
-	public final String BASE_URL = "http://beta.codenvy.com/api/";
+	public final String BASE_URL = "https://beta.codenvy.com/api/";
 	private Retrofit retrofit;
 	private CodenvyApiService apiService;
 	private boolean initialised = false;

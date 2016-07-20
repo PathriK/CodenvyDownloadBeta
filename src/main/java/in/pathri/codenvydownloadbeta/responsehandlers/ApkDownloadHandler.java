@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 
 import android.content.Context;
+import in.pathri.codenvydownloadbeta.CustomLogger;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
@@ -40,7 +41,7 @@ public class ApkDownloadHandler extends ApiResponseHandler<ResponseBody>{
     
     @Override
     public void nextStep(CodenvyResponse codenvyResponses) {
-        HomePageActivity.updateTriggerStatusText("Application Error!!");
+        HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse" + "::" + "Application Error!!");
     }
   
     @Override
@@ -54,7 +55,7 @@ public class ApkDownloadHandler extends ApiResponseHandler<ResponseBody>{
   
     @Override
     void nextStep(List<CodenvyResponse> codenvyResponses) {
-        HomePageActivity.updateTriggerStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse List" + "::" + "Application Error!!");
     }
     
     @Override
@@ -64,6 +65,12 @@ public class ApkDownloadHandler extends ApiResponseHandler<ResponseBody>{
 
 	@Override
 	void handleCookie(Response<ResponseBody> response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnect() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -32,7 +32,7 @@ public class BuildOutputHandler<Z extends CodenvyResponse> extends ApiResponseHa
     
     @Override
     void nextStep(ResponseBody arg0) {
-        HomePageActivity.updateTriggerStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "ResponseBody" + "::" + "Application Error!!");
     }
   
     @Override
@@ -46,7 +46,7 @@ public class BuildOutputHandler<Z extends CodenvyResponse> extends ApiResponseHa
       
     @Override
     void nextStep(List<CodenvyResponse> codenvyResponses) {
-        HomePageActivity.updateTriggerStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse List" + "::" + "Application Error!!");
     }
     
     
@@ -84,5 +84,12 @@ public class BuildOutputHandler<Z extends CodenvyResponse> extends ApiResponseHa
 	void handleCookie(Response<CodenvyResponse> response) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void onConnect() {
+		CustomLogger.i(className, "onConnect", "inside Function");
+		clientImpl.isBuildOutputHandlerReady = true;
+		clientImpl.triggerBuild();
 	}
 }

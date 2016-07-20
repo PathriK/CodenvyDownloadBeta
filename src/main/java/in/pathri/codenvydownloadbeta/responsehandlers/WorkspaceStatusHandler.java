@@ -29,16 +29,16 @@ public class WorkspaceStatusHandler<Z extends CodenvyResponse> extends ApiRespon
       final String respStatus = currentResponse.getStatus();
         if ("STOPPED".equals(respStatus)) {
         	CustomLogger.d(className, "nextStep", "StoppedData", currentResponse.toString());
-          clientImpl.startWorkspace(wid);          
+          clientImpl.readyWorkspaceStatusHandler(wid);          
           this.updateStatusText(respStatus);          
         } else if ("CREATING".equals(respStatus)) {    
         	CustomLogger.d(className, "nextStep", "CreatingData", currentResponse.toString());
         this.updateStatusText(respStatus);
         } else if ("RUNNING".equals(respStatus)) {
         	CustomLogger.d(className, "nextStep", "RunningData", currentResponse.toString());
-        	CustomLogger.d(className, "nextStep", "MachineId", currentResponse.getId());
-        	AppData.setMachineId(currentResponse.getId());
-        	clientImpl.triggerBuild();
+        	CustomLogger.d(className, "nextStep", "MachineId", currentResponse.getMachineId());
+        	AppData.setMachineId(currentResponse.getMachineId());
+        	clientImpl.readyBuildHandler();
         } else {
         	this.updateStatusText("Build Status Unknown" + respStatus);
    	 }
@@ -46,7 +46,7 @@ public class WorkspaceStatusHandler<Z extends CodenvyResponse> extends ApiRespon
     
     @Override
     void nextStep(ResponseBody arg0) {
-        HomePageActivity.updateStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "ResponseBody" + "::" + "Application Error!!");
     }
   
     @Override
@@ -65,11 +65,15 @@ public class WorkspaceStatusHandler<Z extends CodenvyResponse> extends ApiRespon
     
     @Override
     void nextStep(List<CodenvyResponse> codenvyResponses) {
-        HomePageActivity.updateTriggerStatusText("Application Error!!");
+    	HomePageActivity.updateTriggerStatusText(className + "::" + "nextStep" + "::" + "CodenvyResponse List" + "::" + "Application Error!!");
     }
 	@Override
 	void handleCookie(Response<CodenvyResponse> response) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void onConnect() {
+		clientImpl.startWorkspace();		
 	}
 }

@@ -3,7 +3,7 @@ package in.pathri.codenvydownloadbeta.pojo;
 import java.util.List;
 
 public class CodenvyResponseWS implements CodenvyResponse {
-  private String responseCode;
+  private int responseCode;
   private Body body;
   
   public RuntimeDetails getRuntime(){
@@ -14,7 +14,7 @@ public class CodenvyResponseWS implements CodenvyResponse {
   }
   
   public String getId(){
-    return this.body.getMachineId();
+    return "";
   }
   
   public String getMessage(){
@@ -46,7 +46,7 @@ public class CodenvyResponseWS implements CodenvyResponse {
     return "";
   }
   
-  public String getStatusCode(){
+  public int getStatusCode(){
     return this.responseCode;
   }
   
@@ -54,5 +54,9 @@ public class CodenvyResponseWS implements CodenvyResponse {
 	public String toString() {
 		return "{responseCode:" + this.responseCode + ",body:" + this.body.toString() + "}";
 	}
+@Override
+public String getMachineId() {
+return body.getMachineId();
+}
 
 }
