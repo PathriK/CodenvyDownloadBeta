@@ -59,7 +59,7 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
     public synchronized void  triggerBuild(){
     	CustomLogger.d(className, "triggerBuild", "isBuildStatusHandlerReady|isBuildOutputHandlerReady", isBuildStatusHandlerReady + "|" + isBuildOutputHandlerReady);
     	if(isBuildStatusHandlerReady && isBuildOutputHandlerReady){
-    		betaClient.buildProj(AppData.getMachineId(),AppData.getGUID(),AppData.getCommand(), new VoidResponseHandler());
+    		betaClient.buildProj(AppData.getMachineId(),Channels.PROCESS_OUTPUT.getChannel(AppData.getGUID()),AppData.getCommand(), new VoidResponseHandler());
     	}
     }
   

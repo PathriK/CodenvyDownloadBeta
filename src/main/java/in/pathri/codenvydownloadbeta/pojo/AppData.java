@@ -1,7 +1,11 @@
 package in.pathri.codenvydownloadbeta.pojo;
 
 import java.util.UUID;  
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import com.google.common.base.Joiner;
 
@@ -160,7 +164,9 @@ public class AppData {
 	  workspaceName=workspaceId=project=buildTaskId=apkUrl=apkPath=machineId=guidString="";
 	  if(buildOutput != null){
 		  buildOutput.clear();
-	  }
+	  }else{
+       buildOutput = new ArrayList<String>();
+     }
 	  buildResult = BuildResult.NOT_SET;
 	  buildStatus = BuildStatus.NOT_STARTED;
 	  loginData = new LoginData("", "");
