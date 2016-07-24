@@ -91,5 +91,6 @@
         android:id="@+id/status_msg"
         android:text=""
         android:gravity="left"
-        android:padding="3dip" />
+        android:padding="3dip"
+        android:scrollbars = "vertical" />
 </TableLayout>

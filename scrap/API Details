@@ -37,3 +37,9 @@ ws_build.json
 machine process status
 {"method":"POST","headers":[{"name":"x-everrest-websocket-message-type","value":"subscribe-channel"}],"body":"{\"channel\":\"machine:process:machine1708ratuk96zkbhi\"}"}
 process_status
+
+
+http://beta.codenvy.com/swagger/?url=https://beta.codenvy.com:444/35745_node2.beta.codenvy.com/wsagent/ext/docs/swagger.json
+
+To get Project details(APk Path)
+https://beta.codenvy.com:444/35863_node3.beta.codenvy.com/wsagent/ext/project

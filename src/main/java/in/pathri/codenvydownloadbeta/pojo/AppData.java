@@ -65,6 +65,7 @@ public class AppData {
   }
 
   public static String getApkUrl(){
+	  CustomLogger.d(className, "getApkUrl", "apkUrl", apkUrl);
     return apkUrl;
   }
 
@@ -95,7 +96,9 @@ public class AppData {
   }
   
   public static String getBuildOutput(){
-	  return Joiner.on(System.getProperty("line.separator")).join(buildOutput);
+	  String output = Joiner.on(System.getProperty("line.separator")).join(buildOutput);
+	  CustomLogger.d(className, "getBuildOutput", "output", output);
+	  return output;	  
   }
   
   
@@ -146,6 +149,7 @@ public class AppData {
   }
   
   public static void addBuildOutput(String line){
+	  CustomLogger.d(className, "addBuildOutput", "line", line);
 	  AppData.buildOutput.add(line);
   }
   

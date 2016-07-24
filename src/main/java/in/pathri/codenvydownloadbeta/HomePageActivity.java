@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +55,8 @@ public class HomePageActivity extends Activity {
         CodenvyClient.apiInit();
         statusHandler = new Handler();
         context = getApplicationContext();
+        
+        statusMsg.setMovementMethod(new ScrollingMovementMethod());
     }
     
     @Override

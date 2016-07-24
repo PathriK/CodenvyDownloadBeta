@@ -116,9 +116,10 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
 		  CustomLogger.d(className, "checkCompletion", "BuildResult", AppData.getBuildResult().name());
 		if(BuildStatus.COMPLETED.equals(AppData.getBuildStatus())){
 			if(BuildResult.SUCCESS.equals(AppData.getBuildResult())){
+				AppData.setApkUrl(AppData.getProject() + "/target/" + "mobile-android-java-basic" + ".apk");
 				CodenvyClient.getAPK();
 			}else if(BuildResult.FAILED.equals(AppData.getBuildResult())){
-           HomePageActivity.updateStatusText(AppData.getBuildOutput());
+				HomePageActivity.updateStatusText(AppData.getBuildOutput());
 			}
 		}
 	}

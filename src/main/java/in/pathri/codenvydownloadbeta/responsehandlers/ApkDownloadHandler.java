@@ -60,6 +60,7 @@ public class ApkDownloadHandler extends ApiResponseHandler<ResponseBody>{
     
     @Override
     void updateStatusText(String statusText) {
+    	CustomLogger.d(className, "status", "statusText", statusText);
         HomePageActivity.updateDownloadStatusText(statusText);
     }
 

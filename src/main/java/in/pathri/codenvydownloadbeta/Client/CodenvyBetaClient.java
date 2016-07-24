@@ -26,6 +26,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, CodenvyResponseBeta> {
 
@@ -52,17 +53,17 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, C
 		// Call < CodenvyResponseBeta > buildStatus(@Path("wid") String
 		// workspaceId, @Path("id") String buildId);
 
-		// Download APK
-		@GET("machine/{machineId}/filepath/{path}")
-		Call<ResponseBody> getAPK(@Path("machineId") String machineId, @Path("path") String filePath);
-
+        //Download APK
+        @GET
+        Call < ResponseBody > getAPK(@Url String apkUrl);
+        
 		// Get Workspace Details
 		@GET("workspace")
 		Call<List<CodenvyResponseBeta>> getWorkspaceDetails();
 
-		// Get Project Details
-		@GET("project/{wid}")
-		Call<List<CodenvyResponseBeta>> getProjectDetails(@Path("wid") String workspaceId);
+//		// Get Project Details
+//		@GET("project/{wid}")
+//		Call<List<CodenvyResponseBeta>> getProjectDetails(@Path("wid") String workspaceId);
 
 		// Get Worskspace Detail
 		@GET("workspace/{wid}")
@@ -126,8 +127,10 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, C
 
 	public void getAPK(String machineId, String apkPath, Callback<ResponseBody> apkDownloadHandler) {
 		CustomLogger.d(className, "getAPK", "machineId|apkPath", machineId + "|" + apkPath);
+		
+		String downloadURL = "machine/" + machineId + "/filepath/" + apkPath;		
 		// Prepare the HTTP request
-		Call<ResponseBody> getApkCall = apiService.getAPK(machineId, apkPath);
+		Call<ResponseBody> getApkCall = apiService.getAPK(downloadURL);
 
 		// Asynchronously execute HTTP request
 		getApkCall.enqueue(apkDownloadHandler);
