@@ -2,6 +2,8 @@ package in.pathri.codenvydownloadbeta.pojo;
 
 import java.util.List;
 
+import com.google.gson.JsonObject;
+
 public class CodenvyResponseWS implements CodenvyResponse {
   private int responseCode;
   private Body body;
@@ -57,6 +59,26 @@ public class CodenvyResponseWS implements CodenvyResponse {
 @Override
 public String getMachineId() {
 return body.getMachineId();
+}
+@Override
+public String getMachineToken() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public String getProjectURL() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public JsonObject getAttributes() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public String getAttribute(String key) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 }

@@ -41,5 +41,20 @@ process_status
 
 http://beta.codenvy.com/swagger/?url=https://beta.codenvy.com:444/35745_node2.beta.codenvy.com/wsagent/ext/docs/swagger.json
 
-To get Project details(APk Path)
+To get Project details(artifact id)
 https://beta.codenvy.com:444/35863_node3.beta.codenvy.com/wsagent/ext/project
+artifactid.json
+
+
+To Get Token
+https://beta.codenvy.com/api/machine/token/workspacehk62905lvaz9qiao
+{"userId":"userbce0jsgpe1bkza28","workspaceId":"workspacehk62905lvaz9qiao","machineToken":"machinervp2v4wbgqtcc5f4qj7avalmihk7s723fbluba6wz2qttomdmcg8pqsqln9cwtbcbcajym74lvwp2wo4b421h20ijm5qh80nazblwptrarg834wino0gosgd5cukmxnd"}
+
+To get machine swagger:
+https://beta.codenvy.com:444/48781_node1.beta.codenvy.com/wsagent/ext/docs/swagger.json?token=machinervp2v4wbgqtcc5f4qj7avalmihk7s723fbluba6wz2qttomdmcg8pqsqln9cwtbcbcajym74lvwp2wo4b421h20ijm5qh80nazblwptrarg834wino0gosgd5cukmxnd
+
+To get APK
+beta.codenvy.com:444/48781_node1.beta.codenvy.com/wsagent/ext/project/export/file/HelloWorld/target/mobile-android-java-basic.apk?token=machinervp2v4wbgqtcc5f4qj7avalmihk7s723fbluba6wz2qttomdmcg8pqsqln9cwtbcbcajym74lvwp2wo4b421h20ijm5qh80nazblwptrarg834wino0gosgd5cukmxnd
+
+/machine/{machineid}
+machineid.json

@@ -1,47 +1,29 @@
 package in.pathri.codenvydownloadbeta.responsehandlers;
 
-import java.util.Iterator;
 import java.util.List;
 
-import in.pathri.codenvydownloadbeta.CustomLogger;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.Client.CodenvyBetaClientAdapter;
-import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.CodenvyResponse;
-import in.pathri.codenvydownloadbeta.pojo.ResourceLinks;
 import okhttp3.ResponseBody;
-import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WorkspaceStatusHandler<Z extends CodenvyResponse> extends ApiResponseHandler<CodenvyResponse> {
-	private static final String className = WorkspaceStatusHandler.class.getSimpleName();
-    String wid;
+public class MachineResponseHandler<Z extends CodenvyResponse> extends ApiResponseHandler<CodenvyResponse> {
+	private static final String className = MachineResponseHandler.class.getSimpleName();
   	CodenvyBetaClientAdapter clientImpl;
-    public WorkspaceStatusHandler(String wid, CodenvyBetaClientAdapter clientImpl){
+    public MachineResponseHandler( CodenvyBetaClientAdapter clientImpl){
       super(HomePageActivity.buildSpinner,CodenvyResponse.class);
-      this.wid = wid;
       this.clientImpl = clientImpl;
     }
     @Override
     public void nextStep(CodenvyResponse codenvyResponse) {
         final CodenvyResponse currentResponse = codenvyResponse;
-      final String respStatus = currentResponse.getStatus();
-        if ("STOPPED".equals(respStatus)) {
-        	CustomLogger.d(className, "nextStep", "StoppedData", currentResponse.toString());
-          clientImpl.readyWorkspaceStatusHandler(wid);          
-          this.updateStatusText(respStatus);          
-        } else if ("CREATING".equals(respStatus)) {    
-        	CustomLogger.d(className, "nextStep", "CreatingData", currentResponse.toString());
-        this.updateStatusText(respStatus);
-        } else if ("RUNNING".equals(respStatus)) {
-        	CustomLogger.d(className, "nextStep", "RunningData", currentResponse.toString());
-        	CustomLogger.d(className, "nextStep", "MachineId", currentResponse.getMachineId());
-        	AppData.setMachineId(currentResponse.getMachineId());
-        	clientImpl.readyBuild();
-        } else {
-        	this.updateStatusText("Build Status Unknown" + respStatus);
-   	 }
+      String machineToken = currentResponse.getMachineToken();
+      String projectURL = currentResponse.getProjectURL();
+      AppData.setMachineToken(machineToken); 
+      AppData.setProjectURL(projectURL);
+      clientImpl.getArtifactId();      
     }
     
     @Override
@@ -74,6 +56,6 @@ public class WorkspaceStatusHandler<Z extends CodenvyResponse> extends ApiRespon
 	}
 	@Override
 	public void onConnect() {
-		clientImpl.startWorkspace();		
+		// TODO Auto-generated method stub				
 	}
 }

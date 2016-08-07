@@ -23,10 +23,10 @@ public abstract class ApiResponseHandler < T > implements Callback < T > {
     ProgressBar spinner = null;
     CustomProgressDialog pd = null;
     
-    private enum ResponseType{
+    public enum ResponseType{
         POJO,BINARY,ARRAY
     }
-    ResponseType responseType = ResponseType.BINARY;
+    public ResponseType responseType = ResponseType.BINARY;
     
     ApiResponseHandler(ProgressBar spinner, Class < ? > clazz) {
         this.spinner = spinner;

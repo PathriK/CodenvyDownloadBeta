@@ -52,7 +52,7 @@
 		    <groupId>com.neovisionaries</groupId>
 		    <artifactId>nv-websocket-client</artifactId>
 		    <version>1.28</version>
-		</dependency>        
+		</dependency>        	
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -118,7 +118,7 @@
                   </zipalign>     
                 <release>true</release>
 				<undeployBeforeDeploy>true</undeployBeforeDeploy>
-                    <device>192.168.0.103:5555</device>                
+                    <device>192.168.0.106:5555</device>                
               </configuration>
            	  <executions>
                 <execution>

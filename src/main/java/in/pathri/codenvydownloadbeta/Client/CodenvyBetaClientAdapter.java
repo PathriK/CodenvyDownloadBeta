@@ -13,8 +13,10 @@ import in.pathri.codenvydownloadbeta.pojo.CodenvyResponseBeta;
 import in.pathri.codenvydownloadbeta.pojo.CommandDetails;
 import in.pathri.codenvydownloadbeta.pojo.LoginData;
 import in.pathri.codenvydownloadbeta.responsehandlers.ApkDownloadHandler;
+import in.pathri.codenvydownloadbeta.responsehandlers.ArtifactIdResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.BuildOutputHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.BuildStatusHandler;
+import in.pathri.codenvydownloadbeta.responsehandlers.MachineResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.VoidResponseHandler;
 import in.pathri.codenvydownloadbeta.responsehandlers.WorkspaceStatusHandler;
 import okhttp3.ResponseBody;
@@ -48,13 +50,24 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
 //			betaClient.buildProj(workspaceId,project,command,buildResponseHandler);
     }
     
-    public void readyBuildHandler(){
-    	CustomLogger.i(className, "triggerBuild", "Inside Trigger Build");
+    private void readyBuildHandler(){
+    	CustomLogger.i(className, "triggerBuild", "Inside Trigger Build");    	
     	AppData.generateGUID();
     	isBuildOutputHandlerReady = isBuildStatusHandlerReady = false;
     	CodenvyBetaWSClient.getInstance(AppData.getWorkspaceId(),Channels.PROCESS_OUTPUT).initChannel(AppData.getGUID(), new BuildOutputHandler(this));
     	CodenvyBetaWSClient.getInstance(AppData.getWorkspaceId(),Channels.PROCESS_STATUS).initChannel(AppData.getMachineId(), new BuildStatusHandler(this));    	    
     }
+    
+    public void readyBuild(){
+    	this.getMachineTokenAndProjectURL();
+    	this.readyBuildHandler();    	
+    }
+    
+    public void getArtifactId() {
+		String projectURL = AppData.getProjectURL();
+		String machineToken = AppData.getMachineToken();
+		betaClient.getArtifactId(projectURL, machineToken, new ArtifactIdResponseHandler(this));
+	}
     
     public synchronized void  triggerBuild(){
     	CustomLogger.d(className, "triggerBuild", "isBuildStatusHandlerReady|isBuildOutputHandlerReady", isBuildStatusHandlerReady + "|" + isBuildOutputHandlerReady);
@@ -62,7 +75,11 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
     		betaClient.buildProj(AppData.getMachineId(),Channels.PROCESS_OUTPUT.getChannel(AppData.getGUID()),AppData.getCommand(), new VoidResponseHandler());
     	}
     }
-  
+    
+    public void getMachineTokenAndProjectURL(){
+    	betaClient.getMachineDetails(AppData.getMachineId(), new MachineResponseHandler(this));
+    }
+    
     public void readyWorkspaceStatusHandler(String workspaceId){
     	CustomLogger.i(className, "startWorkspace", "Inside startWorkspace");
       CodenvyBetaWSClient.getInstance(workspaceId,Channels.WORKSPACE_STATUS).initChannel(workspaceId, new WorkspaceStatusHandler(workspaceId, this));      
@@ -116,8 +133,13 @@ public class CodenvyBetaClientAdapter implements CodenvyClientInterface<Response
 		  CustomLogger.d(className, "checkCompletion", "BuildResult", AppData.getBuildResult().name());
 		if(BuildStatus.COMPLETED.equals(AppData.getBuildStatus())){
 			if(BuildResult.SUCCESS.equals(AppData.getBuildResult())){
-				AppData.setApkUrl(AppData.getProject() + "/target/" + "mobile-android-java-basic" + ".apk");
-				CodenvyClient.getAPK();
+				String artifactID = AppData.getArtifactId();
+				String projectURL = AppData.getProjectURL();
+				String machineToken = AppData.getMachineToken();
+				if(artifactID != "" && projectURL != "" & machineToken != ""){
+					AppData.setApkUrl(AppData.getProjectURL() + "/project/export/file/" + AppData.getProject() + "/target/" + AppData.getArtifactId() + "." + AppData.getArtifactExt() + "?token=" + AppData.getMachineToken());
+					CodenvyClient.getAPK();					
+				}
 			}else if(BuildResult.FAILED.equals(AppData.getBuildResult())){
 				HomePageActivity.updateStatusText(AppData.getBuildOutput());
 			}

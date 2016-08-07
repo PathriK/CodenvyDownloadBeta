@@ -32,8 +32,14 @@ public class AppData {
   private static BuildStatus buildStatus;
   private static List<String> buildOutput;
   private static Table<String, String,CommandDetails> commandDetailsMap = HashBasedTable.create();
-  
-  {
+  private static String machineToken;
+  private static String projectURL;
+  private static String artifactId;
+  private static String artifactExt;
+
+
+
+{
 	  AppData.clearAll();
   }
   public static LoginData getLoginData(){
@@ -165,18 +171,53 @@ public class AppData {
   
   public static void clearAll(){
 	  CustomLogger.i(className, "ClearAll", "Into Function");
-	  workspaceName=workspaceId=project=buildTaskId=apkUrl=apkPath=machineId=guidString="";
+	  workspaceName=workspaceId=project="";
+	  loginData = new LoginData("", "");
+	  command = new CommandDetails("", "", "");
+	  clearBuildData();
+  }
+  
+  public static void clearBuildData(){
+	  CustomLogger.i(className, "clearBuildData", "Into Function");
+	  buildTaskId=apkUrl=apkPath=machineId=guidString=machineToken=projectURL=artifactId="";
 	  if(buildOutput != null){
 		  buildOutput.clear();
 	  }else{
        buildOutput = new ArrayList<String>();
      }
 	  buildResult = BuildResult.NOT_SET;
-	  buildStatus = BuildStatus.NOT_STARTED;
-	  loginData = new LoginData("", "");
-	  command = new CommandDetails("", "", "");
+	  buildStatus = BuildStatus.NOT_STARTED;	  	  
   }
 
+public static String getMachineToken() {
+	return machineToken;
+}
 
+public static void setMachineToken(String machineToken) {
+	AppData.machineToken = machineToken;
+}
 
+public static void setProjectURL(String projectURL) {
+	AppData.projectURL = projectURL;
+}
+
+public static String getProjectURL() {
+	return projectURL;
+}
+
+public static String getArtifactId() {
+	return artifactId;
+}
+
+public static void setArtifactId(String artifactId) {
+	AppData.artifactId = artifactId;
+}
+
+public static String getArtifactExt() {
+	return artifactExt;
+}
+
+public static void setArtifactExt(String artifactExt) {
+	AppData.artifactExt = artifactExt;
+}
 }

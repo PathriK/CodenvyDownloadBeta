@@ -1,0 +1,56 @@
+[{
+	"links": [{
+		"href": "http://node1.beta.codenvy.com:50350/wsagent/ext/project/HelloWorld",
+		"rel": "update project",
+		"consumes": "application/json",
+		"produces": "application/json",
+		"method": "PUT",
+		"parameters": []
+	}, {
+		"href": "http://node1.beta.codenvy.com:50350/wsagent/ext/project/children/HelloWorld",
+		"rel": "children",
+		"produces": "application/json",
+		"method": "GET",
+		"parameters": []
+	}, {
+		"href": "http://node1.beta.codenvy.com:50350/wsagent/ext/project/tree/HelloWorld",
+		"rel": "tree",
+		"produces": "application/json",
+		"method": "GET",
+		"parameters": []
+	}, {
+		"href": "http://node1.beta.codenvy.com:50350/wsagent/ext/project/HelloWorld",
+		"rel": "delete",
+		"method": "DELETE",
+		"parameters": []
+	}],
+	"mixins": ["pullrequest", "git"],
+	"problems": [],
+	"source": {
+		"location": "https://github.com/che-samples/mobile-android-hello-world.git",
+		"type": "git",
+		"parameters": {}
+	},
+	"name": "HelloWorld",
+	"type": "maven",
+	"path": "/HelloWorld",
+	"attributes": {
+		"maven.artifactId": ["mobile-android-java-basic"],
+		"maven.parent.version": [""],
+		"maven.test.source.folder": ["src/test/java"],
+		"java.output.folder": [""],
+		"maven.version": ["1.0-SNAPSHOT"],
+		"maven.parent.groupId": [""],
+		"languageVersion": ["1.8.0_45"],
+		"language": ["java"],
+		"contribute_to_branch": ["master"],
+		"git.repository.remotes": ["https://github.com/che-samples/mobile-android-hello-world.git"],
+		"maven.groupId": ["com.codenvy.examples"],
+		"maven.packaging": ["apk"],
+		"containsJavaFiles": ["true"],
+		"java.source.folder": ["src/main/java"],
+		"vcs.provider.name": ["git"],
+		"git.current.branch.name": ["master"],
+		"maven.parent.artifactId": [""]
+	}
+}]

@@ -53,6 +53,13 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, C
 		// Call < CodenvyResponseBeta > buildStatus(@Path("wid") String
 		// workspaceId, @Path("id") String buildId);
 
+		//Get Token
+		@GET("machine/{machineId}")
+		Call<CodenvyResponseBeta> getMachineDetails(@Path("machineId") String machineId);
+		
+		@GET
+		Call <List<CodenvyResponseBeta>> getArtifactId(@Url String projectURL);
+		
         //Download APK
         @GET
         Call < ResponseBody > getAPK(@Url String apkUrl);
@@ -125,10 +132,9 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, C
 		System.out.println("NOT IMPLEMENTED");
 	}
 
-	public void getAPK(String machineId, String apkPath, Callback<ResponseBody> apkDownloadHandler) {
-		CustomLogger.d(className, "getAPK", "machineId|apkPath", machineId + "|" + apkPath);
+	public void getAPK(String machineId, String downloadURL, Callback<ResponseBody> apkDownloadHandler) {
+		CustomLogger.d(className, "getAPK", "machineId|apkPath", machineId + "|" + downloadURL);
 		
-		String downloadURL = "machine/" + machineId + "/filepath/" + apkPath;		
 		// Prepare the HTTP request
 		Call<ResponseBody> getApkCall = apiService.getAPK(downloadURL);
 
@@ -181,6 +187,12 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, C
 		Call<CodenvyResponseBeta> workspaceDetailCall = apiService.getWorkspaceDetail(wid);
 		workspaceDetailCall.enqueue(workspaceStatusHandler);
 	}
+	
+	public void getMachineDetails(String machineId, Callback<CodenvyResponseBeta> machineDetailsResponseHandler){
+		CustomLogger.d(className, "getMachineDetails", "machineId", machineId);
+		Call<CodenvyResponseBeta> machineDetailsCall = apiService.getMachineDetails(machineId);
+		machineDetailsCall.enqueue(machineDetailsResponseHandler);		
+	}
 
 	public void startWorkspace(String wid, Callback<ResponseBody> voidResponseHandler) {
 		CustomLogger.d(className, "startWorkspace", "wid", wid);
@@ -213,5 +225,18 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, C
 	public void updateCookie(List<String> cookies) {
 		CustomLogger.i(className, "updateCookie", "Update Cookie Called");
 		CodenvyBetaWSClient.updateCookie(cookies);
+	}
+
+	public void getArtifactId(String projectURL, String machineToken, Callback<List<CodenvyResponseBeta>> artifactIdResponseHandler) {
+		CustomLogger.d(className, "getArtifactId", "projectURL|machineToken", projectURL + "|" + machineToken);
+		
+		String artifactURL = projectURL + "/project?token=" + machineToken;		
+		// Prepare the HTTP request
+		Call<List<CodenvyResponseBeta>> getArtifactCall = apiService.getArtifactId(artifactURL);
+
+		// Asynchronously execute HTTP request
+		getArtifactCall.enqueue(artifactIdResponseHandler);
+
+		
 	}
 }

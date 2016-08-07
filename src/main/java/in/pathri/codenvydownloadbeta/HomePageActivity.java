@@ -110,6 +110,7 @@ public class HomePageActivity extends Activity {
     
     public void onBuild(View view) {
         clearStatusTexts();        
+        AppData.clearBuildData();
         loginStatus.setText("Logging In");
         doLogin();
     }

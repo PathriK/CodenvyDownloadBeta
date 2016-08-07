@@ -1,0 +1,265 @@
+{
+  "links": [
+    {
+      "href": "https://beta.codenvy.com/api/machine/machine8m8gy11bixmzpt0m",
+      "parameters": [],
+      "rel": "self link",
+      "method": "GET",
+      "produces": "application/json"
+    },
+    {
+      "href": "https://beta.codenvy.com/api/machine",
+      "parameters": [
+        {
+          "required": true,
+          "name": "workspace",
+          "valid": [],
+          "defaultValue": "workspacehk62905lvaz9qiao"
+        }
+      ],
+      "rel": "get machines",
+      "method": "GET",
+      "produces": "application/json"
+    },
+    {
+      "href": "https://beta.codenvy.com/api/machine/machine8m8gy11bixmzpt0m",
+      "parameters": [],
+      "rel": "destroy machine",
+      "method": "DELETE"
+    },
+    {
+      "href": "https://beta.codenvy.com/api/machine/snapshot",
+      "parameters": [
+        {
+          "required": true,
+          "name": "workspace",
+          "valid": [],
+          "defaultValue": "workspacehk62905lvaz9qiao"
+        }
+      ],
+      "rel": "get snapshots",
+      "method": "GET",
+      "produces": "application/json"
+    },
+    {
+      "href": "https://beta.codenvy.com/api/machine/machine8m8gy11bixmzpt0m/snapshot",
+      "parameters": [],
+      "rel": "save snapshot",
+      "method": "POST",
+      "produces": "application/json",
+      "consumes": "application/json"
+    },
+    {
+      "href": "https://beta.codenvy.com/api/machine/machine8m8gy11bixmzpt0m/command",
+      "parameters": [
+        {
+          "required": false,
+          "name": "outputChannel",
+          "valid": []
+        }
+      ],
+      "rel": "execute command",
+      "method": "POST",
+      "produces": "application/json",
+      "consumes": "application/json"
+    },
+    {
+      "href": "https://beta.codenvy.com/api/machine/machine8m8gy11bixmzpt0m/process",
+      "parameters": [],
+      "rel": "get processes",
+      "method": "GET",
+      "produces": "application/json"
+    },
+    {
+      "href": "https://beta.codenvy.com/api/machine/machine8m8gy11bixmzpt0m/logs",
+      "parameters": [],
+      "rel": "get machine logs",
+      "method": "GET",
+      "produces": "text/plain"
+    },
+    {
+      "href": "wss://beta.codenvy.com:444/37373_node3.beta.codenvy.com/pty?token=machinertxhn68y1u8ozhwc38vftab6q56eqdsxkwgjfr8jzm72zhkgtanpa7eqalwiew38726gc04l4pzope5f96d61ijnvt9pqekh2iipyr4bkcjp5tnj7e8n5311sz0v4ca1",
+      "parameters": [],
+      "rel": "terminal",
+      "method": "GET"
+    }
+  ],
+  "envName": "MyAndroid",
+  "id": "machine8m8gy11bixmzpt0m",
+  "status": "RUNNING",
+  "owner": "userbce0jsgpe1bkza28",
+  "runtime": {
+    "properties": {
+      "hostConfig.binds": "[/home/codenvy/terminal:/mnt/che/terminal:ro,Z, /home/codenvy/archives/ext-server.zip:/mnt/che/ws-agent.zip:ro,Z, /home/codenvy/codenvy-data/che-machines/workspacehk62905lvaz9qiao:/projects:Z]",
+      "hostConfig.dnsSearch": "null",
+      "network.bridge": "",
+      "hostConfig.volumesFrom": "null",
+      "config.image": "eclipse-che/workspacehk62905lvaz9qiao_machine8m8gy11bixmzpt0m_pathrikumark_ws-machine",
+      "hostConfig.ipcMode": "",
+      "state.paused": "false",
+      "hostConfig.logConfig": "LogConfig{type='json-file', config={}}",
+      "resolvConfPath": "/var/lib/docker/containers/60a7d4c5f5ef266106034e3a08e1785159147db127d90b4036ad3c4b55aa567b/resolv.conf",
+      "config.networkDisabled": "false",
+      "config.openStdin": "false",
+      "path": "/home/user/entrypoint.sh",
+      "network.globalIPv6Address": "",
+      "hostConfig.memory": "3145728000",
+      "state.dead": "false",
+      "network.linkLocalIPv6Address": "",
+      "hostConfig.extraHosts": "[beta.codenvy.com:10.1.0.4, che-host:172.17.42.1]",
+      "hostConfig.cgroupParent": "",
+      "network.globalIPv6PrefixLen": "0",
+      "hostConfig.cpuShares": "0",
+      "id": "60a7d4c5f5ef266106034e3a08e1785159147db127d90b4036ad3c4b55aa567b",
+      "config.securityOpts": "null",
+      "image": "sha256:f5f15eeea6052ddbec7f73c74374175b5eb8c1eb6dc3eb5e5176d91956d6366e",
+      "hostConfig.ulimits": "null",
+      "config.entrypoint": "[/home/user/entrypoint.sh]",
+      "config.exposedPorts": "{22/tcp={}, 4401/tcp={}, 4403/tcp={}, 4411/tcp={}, 6080/tcp={}}",
+      "created": "2016-08-07T03:09:59.626388389Z",
+      "volumes": "{}",
+      "hostConfig.links": "null",
+      "config.user": "user",
+      "hostConfig.cpusetCpus": "",
+      "hostConfig.pidMode": "",
+      "config.tty": "false",
+      "driver": "devicemapper",
+      "config.volumes": "null",
+      "state.pid": "2417",
+      "name": "/workspacehk62905lvaz9qiao_machine8m8gy11bixmzpt0m_pathrikumark_ws-machine",
+      "config.labels": "{che:server:6080:protocol=http, che:server:6080:ref=VNC, com.docker.swarm.id=c043ef9a8d0582b8d18cfc5aec3524e171731037c1911fce903f38c12de79a4d}",
+      "volumesRW": "{}",
+      "hostConfig.devices": "null",
+      "config.hostname": "60a7d4c5f5ef",
+      "config.env": "[JAVA_OPTS=-Xms256m -Xmx2048m -Djava.security.egd=file:/dev/./urandom , CHE_PROJECTS_ROOT=/projects, CHE_LOCAL_CONF_DIR=/mnt/che/conf, CHE_API_ENDPOINT=https://beta.codenvy.com/api, CHE_WORKSPACE_ID=workspacehk62905lvaz9qiao, USER_TOKEN=machinertxhn68y1u8ozhwc38vftab6q56eqdsxkwgjfr8jzm72zhkgtanpa7eqalwiew38726gc04l4pzope5f96d61ijnvt9pqekh2iipyr4bkcjp5tnj7e8n5311sz0v4ca1, PATH=/home/user/android-sdk-linux/tools:/home/user/android-sdk-linux/platform-tools:/opt/jdk1.8.0_45/bin:/home/user/apache-maven-3.3.9/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin, MAVEN_VERSION=3.3.9, JAVA_VERSION=8u45, JAVA_VERSION_PREFIX=1.8.0_45, JAVA_HOME=/opt/jdk1.8.0_45, M2_HOME=/home/user/apache-maven-3.3.9, TERM=xterm, LANG=C.UTF-8, ANDROID_HOME=/home/user/android-sdk-linux]",
+      "state.exitCode": "0",
+      "appArmorProfile": "",
+      "restartCount": "0",
+      "config.attachStdin": "false",
+      "state.startedAt": "2016-08-07T03:10:00.777027687Z",
+      "state.restarting": "false",
+      "config.stdinOnce": "false",
+      "state.running": "true",
+      "hostConfig.containerIDFile": "",
+      "mountLabel": "",
+      "config.cpuShares": "0",
+      "config.attachStderr": "false",
+      "logPath": "/var/lib/docker/containers/60a7d4c5f5ef266106034e3a08e1785159147db127d90b4036ad3c4b55aa567b/60a7d4c5f5ef266106034e3a08e1785159147db127d90b4036ad3c4b55aa567b-json.log",
+      "network.portMappings": "null",
+      "hostsPath": "/var/lib/docker/containers/60a7d4c5f5ef266106034e3a08e1785159147db127d90b4036ad3c4b55aa567b/hosts",
+      "hostConfig.capDrop": "null",
+      "network.macAddress": "02:42:ac:11:00:01",
+      "hostConfig.restartPolicy": "RestartPolicy{name='', maximumRetryCount=0}",
+      "state.OOMKilled": "false",
+      "config.attachStdout": "false",
+      "network.iPv6Gateway": "",
+      "network.ports": "{22/tcp=[PortBinding{hostIp='10.2.0.6', hostPort='37376'}], 4401/tcp=[PortBinding{hostIp='10.2.0.6', hostPort='37375'}], 4403/tcp=[PortBinding{hostIp='10.2.0.6', hostPort='37374'}], 4411/tcp=[PortBinding{hostIp='10.2.0.6', hostPort='37373'}], 6080/tcp=[PortBinding{hostIp='10.2.0.6', hostPort='37372'}]}",
+      "hostConfig.networkMode": "default",
+      "network.gateway": "172.17.42.1",
+      "network.ipPrefixLen": "16",
+      "config.workingDir": "/projects",
+      "hostConfig.dns": "null",
+      "args": "[/bin/sh, -c, tail -f /dev/null]",
+      "config.cmd": "[/bin/sh, -c, tail -f /dev/null]",
+      "network.linkLocalIPv6PrefixLen": "0",
+      "hostConfig.portBindings": "{}",
+      "state.finishedAt": "0001-01-01T00:00:00Z",
+      "hostConfig.lxcConf": "null",
+      "hostConfig.memorySwap": "-1",
+      "state.error": "",
+      "processLabel": "",
+      "hostConfig.capAdd": "null",
+      "hostnamePath": "/var/lib/docker/containers/60a7d4c5f5ef266106034e3a08e1785159147db127d90b4036ad3c4b55aa567b/hostname"
+    },
+    "servers": {
+      "4401/tcp": {
+        "url": "https://beta.codenvy.com:444/37375_node3.beta.codenvy.com/wsagent/ext",
+        "ref": "wsagent",
+        "path": "/37375_node3.beta.codenvy.com/wsagent/ext",
+        "address": "beta.codenvy.com:444",
+        "protocol": "https"
+      },
+      "6080/tcp": {
+        "url": "http://node3.beta.codenvy.com:37372",
+        "ref": "VNC",
+        "address": "node3.beta.codenvy.com:37372",
+        "protocol": "http"
+      },
+      "22/tcp": {
+        "ref": "Server-22-tcp",
+        "address": "node3.beta.codenvy.com:37376"
+      },
+      "4411/tcp": {
+        "url": "https://beta.codenvy.com:444/37373_node3.beta.codenvy.com/",
+        "ref": "terminal",
+        "path": "/37373_node3.beta.codenvy.com/",
+        "address": "beta.codenvy.com:444",
+        "protocol": "https"
+      },
+      "4403/tcp": {
+        "ref": "Server-4403-tcp",
+        "address": "node3.beta.codenvy.com:37374"
+      }
+    },
+    "envVariables": {
+      "PATH": "/home/user/android-sdk-linux/tools:/home/user/android-sdk-linux/platform-tools:/opt/jdk1.8.0_45/bin:/home/user/apache-maven-3.3.9/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_VERSION_PREFIX": "1.8.0_45",
+      "USER_TOKEN": "machinertxhn68y1u8ozhwc38vftab6q56eqdsxkwgjfr8jzm72zhkgtanpa7eqalwiew38726gc04l4pzope5f96d61ijnvt9pqekh2iipyr4bkcjp5tnj7e8n5311sz0v4ca1",
+      "JAVA_HOME": "/opt/jdk1.8.0_45",
+      "MAVEN_VERSION": "3.3.9",
+      "JAVA_OPTS": "-Xms256m -Xmx2048m -Djava.security.egd=file:/dev/./urandom ",
+      "CHE_PROJECTS_ROOT": "/projects",
+      "TERM": "xterm",
+      "LANG": "C.UTF-8",
+      "ANDROID_HOME": "/home/user/android-sdk-linux",
+      "CHE_LOCAL_CONF_DIR": "/mnt/che/conf",
+      "M2_HOME": "/home/user/apache-maven-3.3.9",
+      "CHE_API_ENDPOINT": "https://beta.codenvy.com/api",
+      "CHE_WORKSPACE_ID": "workspacehk62905lvaz9qiao",
+      "JAVA_VERSION": "8u45"
+    }
+  },
+  "config": {
+    "limits": {
+      "ram": 3000
+    },
+    "name": "ws-machine",
+    "type": "docker",
+    "source": {
+      "location": "http://beta.codenvy.com/api/recipe/recipejjxl905kjs26ofd4/script",
+      "type": "dockerfile"
+    },
+    "dev": true,
+    "servers": [],
+    "envVariables": {},
+    "links": [
+      {
+        "href": "wss://beta.codenvy.com/api/ws/workspacehk62905lvaz9qiao",
+        "parameters": [
+          {
+            "required": true,
+            "name": "channel",
+            "valid": [],
+            "defaultValue": "workspacehk62905lvaz9qiao:MyAndroid:ws-machine"
+          }
+        ],
+        "rel": "get machine logs channel",
+        "method": "GET"
+      },
+      {
+        "href": "wss://beta.codenvy.com/api/ws/workspacehk62905lvaz9qiao",
+        "parameters": [
+          {
+            "required": true,
+            "name": "channel",
+            "valid": [],
+            "defaultValue": "machine:status:workspacehk62905lvaz9qiao:ws-machine"
+          }
+        ],
+        "rel": "get machine status channel",
+        "method": "GET"
+      }
+    ]
+  },
+  "workspaceId": "workspacehk62905lvaz9qiao"
+}
