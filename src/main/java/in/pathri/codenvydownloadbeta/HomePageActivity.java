@@ -52,7 +52,6 @@ public class HomePageActivity extends Activity {
         triggerSpinner = (ProgressBar) findViewById(R.id.trigger_progress);
         downloadSpinner = (ProgressBar) findViewById(R.id.download_progress);
         
-        CodenvyClient.apiInit();
         statusHandler = new Handler();
         context = getApplicationContext();
         
@@ -172,9 +171,10 @@ public class HomePageActivity extends Activity {
       AppData.setWorkspaceId(wid);
       AppData.setProject(project);
       AppData.setCommand(command);
-
+      CodenvyClient.apiInit();
       
       if(server != "" && Servers.valueOf(server) == Servers.BETA){
+    	  CodenvyClient.switchServer(Servers.valueOf(server));
         server = "Beta";
       }else{
         server = "";
