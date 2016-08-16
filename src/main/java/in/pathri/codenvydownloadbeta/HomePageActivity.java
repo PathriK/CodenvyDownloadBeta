@@ -24,6 +24,7 @@ import in.pathri.codenvydownloadbeta.pojo.AppData;
 import in.pathri.codenvydownloadbeta.pojo.LoginData;
 import in.pathri.codenvydownloadbeta.pojo.Servers;
 import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
+import com.mukesh.tinydb.TinyDB;
 
 public class HomePageActivity extends Activity {
 	private static final String className = HomePageActivity.class.getSimpleName();
@@ -150,6 +151,12 @@ public class HomePageActivity extends Activity {
         t.printStackTrace(printWriter);
         String s = writer.toString();
         return s;
+    }
+    
+    @Override
+    protected void onPause() {
+    	TinyDB tinydb = new TinyDB(context);
+    	super.onPause();
     }
     
     @Override

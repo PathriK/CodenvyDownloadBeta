@@ -64,22 +64,54 @@
 		  <groupId>com.mukesh</groupId>
 		  <artifactId>tinydb</artifactId>
 		  <version>1.0.1</version>
-		  <type>pom</type>
+		  <type>aar</type>
 		</dependency>		        	
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                    <artifactId>android-maven-plugin</artifactId>
-                    <version>${android.plugin.version}</version>
-                    <extensions>true</extensions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
+			<plugin>
+                <groupId>com.simpligility.maven.plugins</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <version>4.2.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <release>true</release>
+                    <sign>
+                        <debug>false</debug>
+                    </sign>
+                    <androidManifestFile>
+                        AndroidManifest.xml
+                    </androidManifestFile>
+                    <resourceDirectory>res</resourceDirectory>
+                    <assetsDirectory>assets</assetsDirectory>
+                    <nativeLibrariesDirectory>libs
+                    </nativeLibrariesDirectory>
+                  <zipalign>
+                      <verbose>true</verbose>
+                      <inputApk>${project.build.directory}/${project.artifactId}.apk</inputApk>
+                      <outputApk>${project.build.directory}/${project.artifactId}.apk
+                      </outputApk>
+                      <skip>false</skip>  
+                  </zipalign>     
+                    <sdk>
+                        <platform>${android.sdk.platform.version}</platform>
+                    </sdk>
+                    				<undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <device>192.168.0.103:5555</device>                
+                    
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>alignApk</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>zipalign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>        
+        
           <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jarsigner-plugin</artifactId>
@@ -112,37 +144,7 @@
             </execution>
           </executions>
           </plugin>          
-          <plugin>
-              <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-              <artifactId>android-maven-plugin</artifactId>
-              <configuration>
-                  <sdk>
-                      <platform>${android.sdk.platform.version}</platform>
-                  </sdk>
-                  <sign>
-                     <debug>false</debug>
-                  </sign>
-                  <zipalign>
-                      <verbose>true</verbose>
-                      <inputApk>${project.build.directory}/${project.artifactId}.apk</inputApk>
-                      <outputApk>${project.build.directory}/${project.artifactId}.apk
-                      </outputApk>
-                      <skip>false</skip>  
-                  </zipalign>     
-                <release>true</release>
-				<undeployBeforeDeploy>true</undeployBeforeDeploy>
-                    <device>192.168.0.103:5555</device>                
-              </configuration>
-           	  <executions>
-                <execution>
-                  <id>alignApk</id>
-                  <phase>package</phase>
-                  <goals>
-                      <goal>zipalign</goal>
-                  </goals>
-                </execution>
-				</executions>
-          </plugin>
+         
         </plugins>
     </build>
 </project>
