@@ -1,1 +1,7 @@
-/target/
+target/*
+!target/*.apk
+
+# Generated files
+bin/
+gen/
+out/
