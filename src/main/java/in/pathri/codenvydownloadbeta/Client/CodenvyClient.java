@@ -74,7 +74,11 @@ public class CodenvyClient {
   
   public static void buildProj() {
     Log.d(TAG,"Inside build proj Init" + currentInstance.getCurrentURL());
-    currentInstance.buildProj(AppData.getWorkspaceId(),AppData.getProject(),AppData.getCommand(),new BuildResponseHandler());
+    if(serverName == Servers.PRODUCTION){
+    	currentInstance.buildProj(AppData.getWorkspaceId(),AppData.getProject(),new BuildResponseHandler());
+    }else{
+    	currentInstance.buildProj(AppData.getWorkspaceId(),AppData.getProject(),AppData.getCommand(),new BuildResponseHandler());	
+    }    
   }
   public static void buildStatus() {
     Log.d(TAG,"Inside build status Init" + currentInstance.getCurrentURL());

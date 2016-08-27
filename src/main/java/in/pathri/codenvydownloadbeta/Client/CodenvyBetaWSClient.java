@@ -78,6 +78,8 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
 	  CustomLogger.i(className, "connect", "Into Connect");
 	  if(!ws.isOpen()){
 		ws.connectAsynchronously();
+	}else{
+		connectChannel();
 	}
   }
   
@@ -123,7 +125,6 @@ public class CodenvyBetaWSClient extends WebSocketAdapter{
   }
   
   public void closeAllChannel(){
-	  
   }
   
 	public static void updateCookie(List<String> cookies) {

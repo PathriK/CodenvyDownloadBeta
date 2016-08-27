@@ -21,10 +21,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import in.pathri.codenvydownloadbeta.Client.CodenvyClient;
 import in.pathri.codenvydownloadbeta.pojo.AppData;
-import in.pathri.codenvydownloadbeta.pojo.LoginData;
 import in.pathri.codenvydownloadbeta.pojo.Servers;
 import in.pathri.codenvydownloadbeta.preferancehandlers.SetupActivity;
-import com.mukesh.tinydb.TinyDB;
 
 public class HomePageActivity extends Activity {
 	private static final String className = HomePageActivity.class.getSimpleName();
@@ -155,13 +153,15 @@ public class HomePageActivity extends Activity {
     
     @Override
     protected void onPause() {
-    	TinyDB tinydb = new TinyDB(context);
     	super.onPause();
+    	CustomLogger.i(className, "onPause", "into onPause");
+    	AppData.onPause(context);    	
     }
     
     @Override
     protected void onResume(){
         super.onResume();
+        CustomLogger.i(className, "onResume", "into onResume");
         SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         
         String username = myPrefs.getString(SetupActivity.USER_NAME, "");
@@ -172,14 +172,15 @@ public class HomePageActivity extends Activity {
       String command = myPrefs.getString(SetupActivity.COMMAND, ""); 
       String server = myPrefs.getString(SetupActivity.SERVER_DOMAIN, ""); 
 
-      AppData.clearAll();
-      AppData.setLoginData(new LoginData(username,password));
-      AppData.setWorkspaceName(wname);
-      AppData.setWorkspaceId(wid);
-      AppData.setProject(project);
-      AppData.setCommand(command);
-      CodenvyClient.apiInit();
+//      AppData.clearAll();
+//      AppData.setLoginData(new LoginData(username,password));
+//      AppData.setWorkspaceName(wname);
+//      AppData.setWorkspaceId(wid);
+//      AppData.setProject(project);
+//      AppData.setCommand(command);
       
+      AppData.onResume(context);
+         
       if(server != "" && Servers.valueOf(server) == Servers.BETA){
     	  CodenvyClient.switchServer(Servers.valueOf(server));
         server = "Beta";
@@ -189,6 +190,8 @@ public class HomePageActivity extends Activity {
       if(command != ""){
         command = " ; Command: " + command;
       }
+      
+      CodenvyClient.apiInit();
       
         
         

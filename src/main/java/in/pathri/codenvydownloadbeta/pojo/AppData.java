@@ -1,19 +1,20 @@
 package in.pathri.codenvydownloadbeta.pojo;
 
-import java.util.UUID;  
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.UUID;
 
 import com.google.common.base.Joiner;
-
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import android.content.Context;
 import in.pathri.codenvydownloadbeta.CustomLogger;
-import in.pathri.codenvydownloadbeta.HomePageActivity;
+import in.pathri.codenvydownloadbeta.typeadapters.TableGsonAdapter;
+
+import com.mukesh.tinydb.TinyDB;
 
 public class AppData {
 	private static final String className = AppData.class.getSimpleName();
@@ -39,9 +40,9 @@ public class AppData {
 
 
 
-{
-	  AppData.clearAll();
-  }
+//  {
+//	  AppData.clearAll();
+//  }
   public static LoginData getLoginData(){
     return loginData;
   }
@@ -51,6 +52,7 @@ public class AppData {
   }
 
   public static String getWorkspaceId(){
+	  CustomLogger.d(className, "getWorkspaceId", "workspaceId", workspaceId);
     return workspaceId;
   }
 
@@ -160,7 +162,14 @@ public class AppData {
   }
   
   public static void addCommandMap(String wid, String commandName, CommandDetails command){
-    commandDetailsMap.put(wid,commandName, command);
+	  CustomLogger.d(className, "addCommandMap", "wid::commandName::command=", wid + "::" + commandName  + "::" + command);
+    try{
+    	commandDetailsMap.put(wid,commandName, command);
+    	CustomLogger.d(className, "addCommandMap", "commandDetailsMap", commandDetailsMap.toString());
+    } catch(Exception e){
+    	CustomLogger.e(className, "addCommandMap", "error::", e);
+    }
+	  
   }
   
   //Generators
@@ -174,12 +183,14 @@ public class AppData {
 	  workspaceName=workspaceId=project="";
 	  loginData = new LoginData("", "");
 	  command = new CommandDetails("", "", "");
+	  commandDetailsMap.clear();
+	  commandDetailsMap = HashBasedTable.create();
 	  clearBuildData();
   }
   
   public static void clearBuildData(){
 	  CustomLogger.i(className, "clearBuildData", "Into Function");
-	  buildTaskId=apkUrl=apkPath=machineId=guidString=machineToken=projectURL=artifactId="";
+	  buildTaskId=apkUrl=apkPath=machineId=guidString=machineToken=projectURL=artifactId=artifactExt="";
 	  if(buildOutput != null){
 		  buildOutput.clear();
 	  }else{
@@ -220,4 +231,35 @@ public static String getArtifactExt() {
 public static void setArtifactExt(String artifactExt) {
 	AppData.artifactExt = artifactExt;
 }
+
+public static void onPause(Context context){
+	CustomLogger.i(className, "onPause", "into onPause");
+	GsonBuilder gsonBuilder  = new GsonBuilder();
+    gsonBuilder.excludeFieldsWithModifiers(java.lang.reflect.Modifier.TRANSIENT);
+    gsonBuilder.registerTypeAdapter(Table.class, new TableGsonAdapter());
+    Gson gson = gsonBuilder.create();
+	TinyDB tinydb = new TinyDB(context);
+	tinydb.putObject("AppData",new AppData(),gson);
+}
+
+public static void onResume(Context context){
+	CustomLogger.i(className, "onResume", "into onResume");
+  	GsonBuilder gsonBuilder  = new GsonBuilder();
+    gsonBuilder.excludeFieldsWithModifiers(java.lang.reflect.Modifier.TRANSIENT);
+    gsonBuilder.registerTypeAdapter(Table.class, new TableGsonAdapter());
+    Gson gson = gsonBuilder.create();
+	TinyDB tinydb = new TinyDB(context);
+	try{
+		if(tinydb.contains("AppData")){
+			tinydb.getObject("AppData",AppData.class,gson);	
+		}else{
+			CustomLogger.i(className, "onResume", "AppData Key not present");
+		}
+		
+	} catch(Exception e){
+		CustomLogger.e(className, "onResume", "AppData Restore", e);
+	}
+	
+}
+
 }

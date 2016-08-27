@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import in.pathri.codenvydownloadbeta.CustomLogger;
 import in.pathri.codenvydownloadbeta.CustomProgressDialog;
 import in.pathri.codenvydownloadbeta.HomePageActivity;
 import in.pathri.codenvydownloadbeta.R;
@@ -121,6 +122,8 @@ public class SetupActivity extends PreferenceActivity  {
         @Override
         public void onResume() {
             super.onResume();
+            CustomLogger.i(className, "onResume", "into onResume");
+            AppData.onResume(mContext);
             sharedPreferences = getPreferenceScreen().getSharedPreferences();
             getMapPrefs(sharedPreferences);
             sharedPreferences.registerOnSharedPreferenceChangeListener(this);            
@@ -141,6 +144,8 @@ public class SetupActivity extends PreferenceActivity  {
         @Override
         public void onPause() {
             super.onPause();
+            CustomLogger.i(className, "onPause", "into onPause");
+            AppData.onPause(mContext);
             // Set up a listener whenever a key changes
             sharedPreferences = getPreferenceScreen().getSharedPreferences();
             sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
@@ -288,6 +293,7 @@ public class SetupActivity extends PreferenceActivity  {
     }
   
   public static void addCommandMap(String wid, String[] commandArr){
+	  CustomLogger.i(className, "addCommandMap", "into fnf");
     commandDetails.put(wid,commandArr);    
         commadWids.remove(wid);
         if(commadWids.isEmpty()){

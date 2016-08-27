@@ -170,16 +170,23 @@ public class CodenvyBetaClient implements CodenvyClientInterface<ResponseBody, C
 		CustomLogger.d(className, "getCommandDetails", "wid", wid);
 		List<String> names = new ArrayList<String>();
 		CodenvyResponseBeta workspaceDetails = workspaceDetailsMap.get(wid);
+		CustomLogger.i(className, "getCommandDetails", "after-wwkspdtlsmap");
 		Iterator<CommandDetails> iterator = workspaceDetails.getWorkspaceConfig().commands.iterator();
+		CustomLogger.i(className, "getCommandDetails", "after-iterator");
 		while (iterator.hasNext()) {
 			CommandDetails commandDetails = iterator.next();
+			CustomLogger.i(className, "getCommandDetails", "after-iterator next");
 			String name = commandDetails.name;
+			CustomLogger.i(className, "getCommandDetails", "after-getname");
 			names.add(name);
+			CustomLogger.i(className, "getCommandDetails", "after-addname");
 			AppData.addCommandMap(wid, name, commandDetails);
+			CustomLogger.i(className, "getCommandDetails", "after-addmap");
 		}
 		final String[] namesArr = names.toArray(new String[names.size()]);
-
+		CustomLogger.i(className, "getCommandDetails", "after-namestoarray");
 		SetupActivity.addCommandMap(wid, namesArr);
+		CustomLogger.i(className, "getCommandDetails", "after-addcommandmap");
 	}
 
 	public void getWorkspaceDetail(String wid, Callback<CodenvyResponseBeta> workspaceStatusHandler) {
