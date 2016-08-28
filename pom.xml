@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>in.pathri.codenvydownloadbeta</groupId>
     <artifactId>CodenvyDownloadBeta</artifactId>
-    <version>1.0-BETA1-SNAPSHOT</version>
+    <version>1.0-BETA2-SNAPSHOT</version>
     <packaging>apk</packaging>
     <name>Codenvy Download Beta</name>
     <properties>
